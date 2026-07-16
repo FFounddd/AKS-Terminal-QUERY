@@ -298,6 +298,8 @@ input.addEventListener("keydown", async (e)=>{
 
     printPrompt(cmd);
 
+    console.log("COMMAND:", cmd);
+
     input.value = "";
 
     await handleCommand(cmd);
