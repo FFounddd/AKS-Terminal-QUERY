@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AKS Terminal Query</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="noise"></div>
+<div id="scanlines"></div>
+<div id="vignette"></div>
+
+<div id="terminal">
+
+<div id="header">
+
+<div class="title">
+
+GLASSWRIGHT SYSTEMS
+
+</div>
+
+<div class="subtitle">
+
+AKS REMOTE QUERY NODE
+
+</div>
+
+<div class="status">
+
+<span>Crystal Link</span>
+
+<div class="bar">
+<div class="fill" id="linkBar"></div>
+</div>
+
+<span id="statusText">CONNECTING...</span>
+
+</div>
+
+</div>
+
+<div id="output"></div>
+
+<div id="inputRow">
+
+<span class="prompt">QUERY ></span>
+
+<input
+id="command"
+autocomplete="off"
+spellcheck="false"
+autofocus>
+
+</div>
+
+</div>
+
+<script src="boot.js"></script>
+<script src="terminal.js"></script>
+
+</body>
+</html>
