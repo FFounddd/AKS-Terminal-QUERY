@@ -6,11 +6,14 @@
 const input = document.getElementById("command");
 const outputBox = document.getElementById("output");
 
-// --------------------------
-// Utility
-// --------------------------
+let dialogue = {};
+let storyStage = 0;
 
-const wait=(ms)=>new Promise(r=>setTimeout(r,ms));
+// ------------------------------------------------------
+// Utility
+// ------------------------------------------------------
+
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function typeLine(text, speed = 18, color = "") {
 
@@ -21,9 +24,9 @@ async function typeLine(text, speed = 18, color = "") {
 
     outputBox.appendChild(div);
 
-    for (let c of text) {
+    for (const char of text) {
 
-        div.innerHTML += c;
+        div.innerHTML += char;
 
         outputBox.scrollTop = outputBox.scrollHeight;
 
@@ -33,194 +36,172 @@ async function typeLine(text, speed = 18, color = "") {
 
 }
 
+function addOutput(text){
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    outputBox.appendChild(div);
+
+    outputBox.scrollTop = outputBox.scrollHeight;
+
+}
+
 function printPrompt(text){
 
-    const div=document.createElement("div");
+    const div = document.createElement("div");
 
-    div.innerHTML=`<span style="color:#8af6ff;">QUERY ></span> ${text}`;
+    div.innerHTML =
+        `<span style="color:#8af6ff;">QUERY ></span> ${text}`;
 
     outputBox.appendChild(div);
 
 }
 
-// --------------------------
-// Dialogue Database
-// --------------------------
+// ------------------------------------------------------
+// Dialogue
+// ------------------------------------------------------
 
+async function loadDialogue(){
 
-// --------------------------
-// Fake Archive Search
-// --------------------------
+    const response = await fetch("dialogue.json");
 
-async function archiveSearch(term){
+    dialogue = await response.json();
 
-    await typeLine("Searching Crystal Archive...",12);
+    storyStage = dialogue.meta.storyStage;
 
-    await sleep(500);
+}
 
-    await typeLine("Searching Incident Reports...",12);
+async function playDialogue(key){
 
-    await sleep(700);
+    if(!dialogue.responses[key]){
 
-    await typeLine("Searching Personnel Database...",12);
+        await typeLine("No Records Found.");
 
-    await sleep(900);
+        return;
 
-    switch(term){
+    }
 
-        case "found":
+    const section = dialogue.responses[key];
 
-            await typeLine("");
+    const stageKey = "stage" + storyStage;
 
-            await typeLine("No Records Located.");
+    const lines =
+        section[stageKey] ||
+        section.default ||
+        [];
 
-            await sleep(1800);
+    for(const line of lines){
 
-            await typeLine("...");
-
-            await sleep(1800);
-
-            await typeLine("Correction.",20,"#8af6ff");
-
-            await sleep(1200);
-
-            await typeLine("One Restricted Record Located.",18);
-
-            await sleep(1500);
-
-            await typeLine("ACCESS DENIED",20,"#ff8888");
-
-            await sleep(1800);
-
-            await typeLine("Forget that name.",18);
-
-            break;
-
-        case "medea":
-
-            await typeLine("");
-
-            await typeLine("Searching...");
-
-            await sleep(2500);
-
-            await typeLine("No Results.");
-
-            break;
-
-        case "eter":
-
-            await typeLine("");
-
-            await typeLine("Archive Restricted.");
-
-            break;
-
-        case "glasswright":
-
-            await typeLine("");
-
-            await typeLine("728 Results Found.");
-
-            await sleep(1200);
-
-            await typeLine("Displaying Public Records...");
-
-            break;
-
-        default:
-
-            await typeLine("");
-
-            await typeLine("0 Matching Records.");
+        await typeLine(line);
 
     }
 
 }
 
-// --------------------------
-// Handle Input
-// --------------------------
+// ------------------------------------------------------
+// Archive Search
+// ------------------------------------------------------
 
-input.addEventListener("keydown", async (e)=>{
+async function archiveSearch(term){
 
-    if(e.key!="Enter") return;
+    await typeLine("Searching Crystal Archive...",12);
 
-    const cmd=input.value.trim();
+    await wait(500);
 
-    if(cmd==="") return;
+    await typeLine("Searching Incident Reports...",12);
 
-    input.disabled=true;
+    await wait(700);
 
-    printPrompt(cmd);
+    await typeLine("Searching Personnel Database...",12);
 
-    input.value="";
+    await wait(900);
 
-    outputBox.scrollTop=outputBox.scrollHeight;
+    await playDialogue(term);
 
-    const split=cmd.toLowerCase().split(" ");
+}
 
-    const base=split[0];
+// ------------------------------------------------------
+// Commands
+// ------------------------------------------------------
+
+async function handleCommand(cmd){
+
+    const split = cmd.toLowerCase().split(" ");
+
+    const base = split[0];
 
     switch(base){
 
         case "help":
 
-            for(const line of responses.help){
-
-                await typeLine(line);
-
-            }
-
-            break;
-
-        case "clear":
-
-            outputBox.innerHTML="";
+            await playDialogue("help");
 
             break;
 
         case "status":
 
-            for(const line of responses.status){
-
-                await typeLine(line);
-
-            }
+            await playDialogue("status");
 
             break;
 
-        case "who":
+        case "clear":
 
-            for(const line of responses.who){
-
-                await typeLine(line);
-
-            }
+            outputBox.innerHTML = "";
 
             break;
 
         case "disconnect":
 
-            for(const line of responses.disconnect){
+            await typeLine("Disconnect request denied.");
 
-                await typeLine(line);
+            break;
 
-            }
+        case "who":
+
+            await typeLine("Searching Personnel Database...");
+
+            await wait(900);
+
+            await typeLine("Identity unavailable.");
 
             break;
 
         case "query":
 
-            if(split.length==1){
+            if(split.length < 2){
 
-                await typeLine("Usage: query [term]");
+                await typeLine("Usage: query <term>");
 
             }else{
 
-                await archiveSearch(split.slice(1).join(" "));
+                await archiveSearch(
+                    split.slice(1).join(" ")
+                );
 
             }
+
+            break;
+
+        case "archive":
+
+            addOutput("");
+            addOutput("Opening Crystal Archive...");
+
+            break;
+
+        case "logs":
+
+            addOutput("");
+            addOutput("Recovered Logs");
+
+            break;
+
+        case "personnel":
+
+            addOutput("");
+            addOutput("Opening Personnel Database...");
 
             break;
 
@@ -228,26 +209,46 @@ input.addEventListener("keydown", async (e)=>{
 
             await typeLine("Unknown Command.");
 
-            await sleep(900);
+            await wait(700);
 
             await typeLine("Type HELP");
 
     }
 
-    outputBox.scrollTop=outputBox.scrollHeight;
+}
 
-    input.disabled=false;
+// ------------------------------------------------------
+// Input
+// ------------------------------------------------------
+
+input.addEventListener("keydown", async (e)=>{
+
+    if(e.key !== "Enter")
+        return;
+
+    const cmd = input.value.trim();
+
+    if(cmd === "")
+        return;
+
+    input.disabled = true;
+
+    printPrompt(cmd);
+
+    input.value = "";
+
+    await handleCommand(cmd);
+
+    outputBox.scrollTop = outputBox.scrollHeight;
+
+    input.disabled = false;
 
     input.focus();
-function addOutput(text){
 
-    const div=document.createElement("div");
-
-    div.textContent=text;
-
-    outputBox.appendChild(div);
-
-    outputBox.scrollTop=outputBox.scrollHeight;
-
-}
 });
+
+// ------------------------------------------------------
+// Startup
+// ------------------------------------------------------
+
+loadDialogue();
