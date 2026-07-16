@@ -93,19 +93,32 @@ async function playDialogue(key){
 
         lines = response[stageKey];
 
-    }
-    else if(response.default){
+    }else if(response.default){
 
         lines = response.default;
 
-    }
-    else{
+    }else{
 
         await typeLine("No Dialogue Found.");
 
         return;
 
     }
+
+    for(const line of lines){
+
+        if(line === ""){
+
+            outputBox.appendChild(document.createElement("br"));
+            continue;
+
+        }
+
+        await typeLine(line);
+
+    }
+
+}
 
     for(const line of lines){
 
@@ -182,28 +195,33 @@ async function archiveSearch(term){
 async function handleCommand(cmd){
 
     const split = cmd.toLowerCase().split(" ");
-
     const base = split[0];
 
     switch(base){
 
-     await playDialogue("help");
-break;
+        case "help":
 
-       await playDialogue("status");
-break;
+            await playDialogue("help");
+
+        break;
+
+        case "status":
+
+            await playDialogue("status");
+
+        break;
 
         case "clear":
 
             outputBox.innerHTML = "";
 
-            break;
+        break;
 
         case "disconnect":
 
-    await typeLine("Disconnect request denied.");
+            await typeLine("Disconnect request denied.");
 
-break;
+        break;
 
         case "who":
 
@@ -213,44 +231,42 @@ break;
 
             await typeLine("Identity unavailable.");
 
-            break;
+        break;
 
-       case "query":
+        case "query":
 
-    if(split.length < 2){
+            if(split.length < 2){
 
-        await typeLine("Usage: query <term>");
+                await typeLine("Usage: query <term>");
 
-    }else{
+            }else{
 
-        await archiveSearch(
-            split.slice(1).join(" ")
-        );
+                await archiveSearch(split.slice(1).join(" "));
 
-    }
+            }
 
-break;
+        break;
 
         case "archive":
 
             addOutput("");
             addOutput("Opening Crystal Archive...");
 
-            break;
+        break;
 
         case "logs":
 
             addOutput("");
             addOutput("Recovered Logs");
 
-            break;
+        break;
 
         case "personnel":
 
             addOutput("");
             addOutput("Opening Personnel Database...");
 
-            break;
+        break;
 
         default:
 
