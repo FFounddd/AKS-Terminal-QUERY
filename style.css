@@ -493,4 +493,111 @@ background:#7ab8ff;
 
 color:black;
 
+/* ==========================================
+Workspace
+========================================== */
+
+#workspace{
+
+display:flex;
+
+height:calc(100% - 170px);
+
+}
+
+/* Sidebar */
+
+#sidebar{
+
+width:220px;
+
+background:#0d1117;
+
+border-right:1px solid rgba(255,255,255,.08);
+
+padding:18px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.sideTitle{
+
+font-size:12px;
+
+letter-spacing:3px;
+
+color:#6a86af;
+
+margin-bottom:10px;
+
+}
+
+/* Buttons */
+
+.module{
+
+background:transparent;
+
+border:none;
+
+padding:14px;
+
+color:#b9d5ff;
+
+font-family:inherit;
+
+font-size:15px;
+
+text-align:left;
+
+cursor:pointer;
+
+border-radius:8px;
+
+transition:.25s;
+
+}
+
+.module:hover{
+
+background:rgba(122,184,255,.08);
+
+}
+
+.module.active{
+
+background:rgba(122,184,255,.18);
+
+box-shadow:0 0 15px rgba(122,184,255,.15);
+
+}
+
+/* Main */
+
+#mainPanel{
+
+display:flex;
+
+flex-direction:column;
+
+flex:1;
+
+}
+
+#output{
+
+flex:1;
+
+}
+
+#inputRow{
+
+margin-top:auto;
+
+}
 }
