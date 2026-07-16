@@ -3,8 +3,54 @@
 // Terminal Logic
 // ======================================================
 
-const input = document.getElementById("command");
-const outputBox = document.getElementById("output");
+<div id="workspace">
+
+    <div id="sidebar">
+
+        <div class="sideTitle">
+            MODULES
+        </div>
+
+        <button class="module active" data-window="query">
+            QUERY
+        </button>
+
+        <button class="module" data-window="archive">
+            ARCHIVE
+        </button>
+
+        <button class="module" data-window="logs">
+            LOGS
+        </button>
+
+        <button class="module" data-window="personnel">
+            PERSONNEL
+        </button>
+
+        <button class="module" data-window="network">
+            NETWORK
+        </button>
+
+    </div>
+
+    <div id="mainPanel">
+
+        <div id="output"></div>
+
+        <div id="inputRow">
+
+            <span class="prompt">QUERY ></span>
+
+            <input
+                id="command"
+                autocomplete="off"
+                spellcheck="false">
+
+        </div>
+
+    </div>
+
+</div>
 
 // --------------------------
 // Utility
