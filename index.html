@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AKS Terminal Query</title>
+<title>Glasswright Unified Archive System</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,59 +17,179 @@
 
 <body>
 
+<!-- Ambient Effects -->
+
 <div id="noise"></div>
 <div id="scanlines"></div>
 <div id="vignette"></div>
 
-<div id="terminal">
+<div id="desktop">
 
-<div id="header">
+    <!-- ================= Sidebar ================= -->
 
-<div class="title">
+    <aside id="sidebar">
 
-GLASSWRIGHT SYSTEMS
+        <div id="logo">
 
-</div>
+            <div class="logoSymbol">◈</div>
 
-<div class="subtitle">
+            <div>
 
-AKS REMOTE QUERY NODE
+                <h1>GLASSWRIGHT</h1>
+                <span>Unified Archive System</span>
 
-</div>
+            </div>
 
-<div class="status">
+        </div>
 
-<span>Crystal Link</span>
+        <div class="navTitle">
+            MODULES
+        </div>
 
-<div class="bar">
-<div class="fill" id="linkBar"></div>
-</div>
+        <button class="module active" data-window="query">
+            Query Terminal
+        </button>
 
-<span id="statusText">CONNECTING...</span>
+        <button class="module" data-window="archive">
+            Crystal Archive
+        </button>
 
-</div>
+        <button class="module" data-window="personnel">
+            Personnel
+        </button>
 
-</div>
+        <button class="module" data-window="research">
+            Research
+        </button>
 
-<div id="output"></div>
+        <button class="module" data-window="logs">
+            Recovered Logs
+        </button>
 
-<div id="inputRow">
+        <button class="module" data-window="network">
+            Crystal Network
+        </button>
 
-<span class="prompt">QUERY ></span>
+        <button class="module" data-window="diagnostics">
+            Diagnostics
+        </button>
 
-<input
-id="command"
-autocomplete="off"
-spellcheck="false"
-autofocus>
+    </aside>
 
-</div>
+    <!-- ================= Main ================= -->
+
+    <main id="main">
+
+        <!-- Top Bar -->
+
+        <header id="topbar">
+
+            <div>
+
+                <div id="systemName">
+
+                    AKS REMOTE QUERY NODE
+
+                </div>
+
+                <div id="build">
+
+                    Build 2.7.18
+
+                </div>
+
+            </div>
+
+            <div id="systemStatus">
+
+                <div class="statusItem">
+
+                    Crystal Link
+
+                    <div class="bar">
+
+                        <div
+                        class="fill"
+                        id="linkBar">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="statusItem">
+
+                    <span id="statusText">
+
+                        CONNECTING...
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Workspace -->
+
+        <section id="workspace">
+
+            <!-- This becomes draggable later -->
+
+            <div id="window">
+
+                <div id="windowHeader">
+
+                    <span>
+
+                        QUERY TERMINAL
+
+                    </span>
+
+                    <div class="windowButtons">
+
+                        <span>—</span>
+
+                        <span>□</span>
+
+                        <span>✕</span>
+
+                    </div>
+
+                </div>
+
+                <div id="output"></div>
+
+                <div id="inputRow">
+
+                    <span class="prompt">
+
+                        QUERY >
+
+                    </span>
+
+                    <input
+                        id="command"
+                        autocomplete="off"
+                        spellcheck="false"
+                        autofocus>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 <script src="boot.js"></script>
 <script src="terminal.js"></script>
 <script src="ui.js"></script>
-  
+
 </body>
+
 </html>
