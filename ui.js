@@ -1,87 +1,60 @@
-// =========================================
-// AKS UI Manager
-// =========================================
+const buttons = document.querySelectorAll(".module");
 
-let currentWindow = "query";
+buttons.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+buttons.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+openWindow(button.dataset.window);
+
+});
+
+});
 
 function openWindow(name){
 
-    currentWindow = name;
+output.innerHTML="";
 
-    switch(name){
+switch(name){
 
-        case "query":
+case "query":
 
-            document.getElementById("output").innerHTML="";
+addOutput("AKS Remote Query Terminal");
+addOutput("");
+addOutput("Awaiting Query...");
+break;
 
-            terminalIntro();
+case "archive":
 
-            break;
+addOutput("Archive Browser");
+addOutput("----------------");
+addOutput("Type QUERY [TERM]");
+break;
 
-        case "archive":
+case "logs":
 
-            archiveWindow();
+addOutput("Recovered Logs");
+addOutput("----------------");
+addOutput("No logs recovered.");
+break;
 
-            break;
+case "personnel":
 
-        case "logs":
+addOutput("Personnel Database");
+addOutput("--------------------");
+addOutput("Awaiting Search");
+break;
 
-            logsWindow();
+case "network":
 
-            break;
-
-        case "personnel":
-
-            personnelWindow();
-
-            break;
-
-        case "network":
-
-            networkWindow();
-
-            break;
-
-    }
-
-}
-
-function terminalIntro(){
-
-    addOutput("AKS Remote Query Terminal");
-    addOutput("");
-    addOutput("Awaiting Input...");
+addOutput("Crystal Network");
+addOutput("----------------");
+addOutput("Node Stable");
+break;
 
 }
-
-function archiveWindow(){
-
-    addOutput("Crystal Archive");
-    addOutput("--------------------");
-    addOutput("Type QUERY [TERM]");
-
-}
-
-function logsWindow(){
-
-    addOutput("Recovered Logs");
-    addOutput("--------------------");
-    addOutput("No logs recovered.");
-
-}
-
-function personnelWindow(){
-
-    addOutput("Personnel Database");
-    addOutput("--------------------");
-    addOutput("Awaiting Search");
-
-}
-
-function networkWindow(){
-
-    addOutput("Crystal Network");
-    addOutput("--------------------");
-    addOutput("Remote Node Connected");
 
 }
