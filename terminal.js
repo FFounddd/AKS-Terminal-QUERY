@@ -3,12 +3,14 @@
 // Terminal Logic
 // ======================================================
 
+const input = document.getElementById("command");
+const outputBox = document.getElementById("output");
 
 // --------------------------
 // Utility
 // --------------------------
 
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+const wait=(ms)=>new Promise(r=>setTimeout(r,ms));
 
 async function typeLine(text, speed = 18, color = "") {
 
@@ -25,7 +27,7 @@ async function typeLine(text, speed = 18, color = "") {
 
         outputBox.scrollTop = outputBox.scrollHeight;
 
-        await sleep(speed);
+        await wait(speed);
 
     }
 
