@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "version": "0.1",
+    "storyStage": 0
+  },
+
+  "responses": {
+
+    "help": {
+
+      "default": [
+
+        "AVAILABLE COMMANDS",
+
+        "",
+
+        "help",
+
+        "clear",
+
+        "status",
+
+        "query <term>",
+
+        "logs",
+
+        "archive",
+
+        "personnel",
+
+        "disconnect"
+
+      ]
+
+    },
+
+    "status": {
+
+      "default":[
+
+        "Crystal Link ........ STABLE",
+
+        "Archive Integrity ... UNKNOWN",
+
+        "Node ................. REMOTE",
+
+        "Administrator ........ UNVERIFIED"
+
+      ]
+
+    },
+
+    "found":{
+
+      "stage0":[
+
+        "Searching Personnel Database...",
+
+        "",
+
+        "No Records Located.",
+
+        "...",
+
+        "Correction.",
+
+        "One Restricted Record Located.",
+
+        "ACCESS DENIED",
+
+        "",
+
+        "Forget that name."
+
+      ],
+
+      "stage1":[
+
+        "Searching Personnel Database...",
+
+        "...",
+
+        "Restricted Archive Located.",
+
+        "...",
+
+        "You shouldn't be asking about him.",
+
+        "Focus."
+
+      ],
+
+      "stage2":[
+
+        "Searching Personnel Database...",
+
+        "...",
+
+        "I knew him.",
+
+        "Can you tell?",
+
+        "My secret, I mean...",
+
+        "Me and him, we're the same.",
+
+        "Except I ran away, I escaped the suit, I killed Eter, and now...",
+
+        "Never mind, It's irrelevant, You'll figure it out in time."
+
+      ]
+
+    },
+
+    "medea":{
+
+      "stage0":[
+
+        "Searching Personnel Database...",
+
+        "...",
+
+        "No Records Found."
+
+      ],
+
+      "stage1":[
+
+        "Searching Personnel Database...",
+
+        "...",
+
+        "No Results.",
+
+        "...",
+
+        "Keep looking."
+
+      ],
+
+      "stage2":[
+
+        "Searching Personnel Database...",
+
+        "...",
+
+        "She deserved better.",
+
+        "I let her sacrifice herself with me",
+        
+        "I let them kill her in the same facility as me",
+
+        "I let them use her to sustain me",
+
+        "I ripped out his spine for that.",
+
+        "But it won't bring her back.",
+
+        "What I am going to do next will though."
+
+      ]
+
+    },
+
+    "eter":{
+
+      "stage0":[
+
+        "Searching Divine Archives...",
+
+        "",
+
+        "ACCESS RESTRICTED"
+
+      ]
+
+    },
+
+    "glasswright":{
+
+      "stage0":[
+
+        "Searching Corporate Archive...",
+
+        "",
+
+        "728 Public Records Found.",
+
+        "",
+
+        "Displaying Public Documents."
+
+      ]
+
+    },
+
+    "ori":{
+
+      "stage0":[
+
+        "Searching Personnel Database...",
+
+        "...",
+
+        "No Results."
+
+      ],
+
+      "stage1":[
+
+        "...",
+
+        "Wrong question."
+
+      ],
+
+      "stage2":[
+
+        "...",
+
+        "Really?",
+
+        "We've met already.",
+
+        "You've done my work.",
+
+        "Just keep it up, I know you're working with him, with Caelen. It's fine, we want similar ends."
+
+      ]
+
+    }
+
+  }
+}
