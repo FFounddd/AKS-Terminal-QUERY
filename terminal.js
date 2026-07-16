@@ -118,7 +118,7 @@ async function playDialogue(key){
 
     }
 
-}
+
 
     for(const line of lines){
 
