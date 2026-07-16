@@ -83,16 +83,69 @@ async function playDialogue(key){
 
     }
 
-    const section = dialogue.responses[key];
+    const response = dialogue.responses[key];
+
+    let lines = [];
 
     const stageKey = "stage" + storyStage;
 
-    const lines =
-        section[stageKey] ||
-        section.default ||
-        [];
+    if(response[stageKey]){
+
+        lines = response[stageKey];
+
+    }
+    else if(response.default){
+
+        lines = response.default;
+
+    }
+    else{
+
+        await typeLine("No Dialogue Found.");
+
+        return;
+
+    }
 
     for(const line of lines){
+
+        if(line === ""){
+
+            await wait(250);
+
+            outputBox.appendChild(document.createElement("br"));
+
+            continue;
+
+        }
+
+        if(line === "..."){
+
+            await typeLine("...",50);
+
+            await wait(700);
+
+            continue;
+
+        }
+
+        if(line === "ACCESS DENIED"){
+
+            await typeLine(line,22,"#ff6d6d");
+
+            continue;
+
+        }
+
+        if(line === "Correction."){
+
+            await wait(700);
+
+            await typeLine(line,18,"#8af6ff");
+
+            continue;
+
+        }
 
         await typeLine(line);
 
@@ -112,7 +165,7 @@ async function archiveSearch(term){
 
     await typeLine("Searching Incident Reports...",12);
 
-    await wait(700);
+    await wait(600);
 
     await typeLine("Searching Personnel Database...",12);
 
@@ -134,17 +187,11 @@ async function handleCommand(cmd){
 
     switch(base){
 
-        case "help":
+     await playDialogue("help");
+break;
 
-            await playDialogue("help");
-
-            break;
-
-        case "status":
-
-            await playDialogue("status");
-
-            break;
+       await playDialogue("status");
+break;
 
         case "clear":
 
@@ -154,9 +201,9 @@ async function handleCommand(cmd){
 
         case "disconnect":
 
-            await typeLine("Disconnect request denied.");
+    await typeLine("Disconnect request denied.");
 
-            break;
+break;
 
         case "who":
 
@@ -168,21 +215,21 @@ async function handleCommand(cmd){
 
             break;
 
-        case "query":
+       case "query":
 
-            if(split.length < 2){
+    if(split.length < 2){
 
-                await typeLine("Usage: query <term>");
+        await typeLine("Usage: query <term>");
 
-            }else{
+    }else{
 
-                await archiveSearch(
-                    split.slice(1).join(" ")
-                );
+        await archiveSearch(
+            split.slice(1).join(" ")
+        );
 
-            }
+    }
 
-            break;
+break;
 
         case "archive":
 
@@ -251,4 +298,8 @@ input.addEventListener("keydown", async (e)=>{
 // Startup
 // ------------------------------------------------------
 
-loadDialogue();
+loadDialogue().then(() => {
+
+    console.log("Dialogue Loaded.");
+
+});
