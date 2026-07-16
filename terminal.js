@@ -294,5 +294,15 @@ input.addEventListener("keydown", async (e)=>{
     input.disabled=false;
 
     input.focus();
+function addOutput(text){
 
+    const div=document.createElement("div");
+
+    div.textContent=text;
+
+    outputBox.appendChild(div);
+
+    outputBox.scrollTop=outputBox.scrollHeight;
+
+}
 });
