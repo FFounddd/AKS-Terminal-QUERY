@@ -105,20 +105,6 @@ async function playDialogue(key){
 
     }
 
-    for(const line of lines){
-
-        if(line === ""){
-
-            outputBox.appendChild(document.createElement("br"));
-            continue;
-
-        }
-
-        await typeLine(line);
-
-    }
-
-
 
     for(const line of lines){
 
