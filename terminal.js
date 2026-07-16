@@ -47,61 +47,6 @@ function printPrompt(text){
 // Dialogue Database
 // --------------------------
 
-const responses = {
-
-help: [
-
-"Available Commands",
-
-"",
-
-"help",
-
-"clear",
-
-"status",
-
-"query [term]",
-
-"who",
-
-"disconnect"
-
-],
-
-status: [
-
-"Crystal Link ........ STABLE",
-
-"Archive Integrity ... UNKNOWN",
-
-"Node ................. REMOTE",
-
-"Administrator ........ UNVERIFIED"
-
-],
-
-who: [
-
-"Searching Personnel Database...",
-
-"...",
-
-"No verified personnel match.",
-
-"...",
-
-"Identity irrelevant."
-
-],
-
-disconnect:[
-
-"Disconnect request denied."
-
-]
-
-};
 
 // --------------------------
 // Fake Archive Search
