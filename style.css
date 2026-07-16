@@ -1,28 +1,35 @@
-/* ==========================================================
-   AKS TERMINAL QUERY
-   Glasswright Systems
-========================================================== */
+/* ============================================================
+   GLASSWRIGHT UNIFIED ARCHIVE SYSTEM
+   Version 2.0
+============================================================ */
 
 :root{
 
-    --bg:#08090d;
-    --terminal:#0f1218;
-    --border:#2b3342;
+    --bg:#07090d;
+    --bg2:#0d1118;
+    --bg3:#141922;
 
-    --text:#d7e4ff;
-    --sub:#8ca4d7;
+    --panel:#111722;
+    --panel2:#171e2a;
 
-    --blue:#7ab8ff;
-    --cyan:#9df6ff;
+    --border:#283243;
+
+    --text:#eef4ff;
+    --sub:#8da3c6;
+
+    --blue:#72b8ff;
+    --cyan:#8ff5ff;
 
     --shadow:rgba(0,0,0,.75);
 
 }
 
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
 html,
@@ -33,20 +40,18 @@ body{
 
     overflow:hidden;
 
-    background:radial-gradient(circle at top,
-    #1c2330 0%,
-    #090a0e 45%,
-    #050506 100%);
-
     font-family:"IBM Plex Mono",monospace;
+
+    background:
+    radial-gradient(circle at top,#182334 0%,#090b10 45%,#050608 100%);
 
     color:var(--text);
 
 }
 
-/* ==========================================
-Background
-========================================== */
+/* ============================================================
+BACKGROUND
+============================================================ */
 
 body::before{
 
@@ -56,150 +61,269 @@ body::before{
 
     inset:0;
 
-    background-image:
+    background:
 
-    radial-gradient(circle at 20% 20%,rgba(122,184,255,.06),transparent 30%),
-    radial-gradient(circle at 80% 70%,rgba(80,255,255,.04),transparent 35%);
+    radial-gradient(circle at 15% 20%,
+    rgba(114,184,255,.08),
+    transparent 35%),
 
-    animation:drift 18s linear infinite alternate;
+    radial-gradient(circle at 90% 75%,
+    rgba(143,245,255,.05),
+    transparent 35%);
 
     pointer-events:none;
 
 }
 
-@keyframes drift{
+/* ============================================================
+DESKTOP
+============================================================ */
 
-0%{
+#desktop{
 
-transform:translateY(-10px);
+    width:100vw;
+    height:100vh;
 
-}
-
-100%{
-
-transform:translateY(15px);
-
-}
+    display:flex;
 
 }
 
-/* ==========================================
-CRT Monitor
-========================================== */
+/* ============================================================
+SIDEBAR
+============================================================ */
 
-#terminal{
+#sidebar{
 
-    position:absolute;
+    width:260px;
 
-    left:50%;
-    top:50%;
+    background:rgba(8,12,18,.78);
 
-    transform:translate(-50%,-50%);
+    backdrop-filter:blur(18px);
 
-    width:min(1200px,90vw);
+    border-right:1px solid rgba(255,255,255,.05);
 
-    height:min(760px,88vh);
+    padding:30px 22px;
 
-    background:linear-gradient(
-    180deg,
-    rgba(19,23,31,.95),
-    rgba(10,12,17,.97));
+    display:flex;
 
-    border:2px solid var(--border);
-
-    border-radius:18px;
-
-    box-shadow:
-
-    0 0 0 2px rgba(255,255,255,.03),
-
-    0 0 60px rgba(0,0,0,.85),
-
-    0 0 140px rgba(122,184,255,.08);
-
-    overflow:hidden;
+    flex-direction:column;
 
 }
 
-/* curved glass */
+#logo{
 
-#terminal::before{
+    display:flex;
 
-    content:"";
+    align-items:center;
 
-    position:absolute;
+    gap:18px;
 
-    inset:0;
+    margin-bottom:40px;
+
+}
+
+.logoSymbol{
+
+    width:58px;
+    height:58px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    color:var(--cyan);
 
     background:
 
-    linear-gradient(115deg,
-    rgba(255,255,255,.08),
-    transparent 18%),
+    linear-gradient(
+    135deg,
+    rgba(114,184,255,.12),
+    rgba(143,245,255,.04));
 
-    radial-gradient(circle at top,
-    rgba(255,255,255,.06),
-    transparent 45%);
-
-    pointer-events:none;
+    border:1px solid rgba(255,255,255,.06);
 
 }
 
-/* ==========================================
-Header
-========================================== */
+#logo h1{
 
-#header{
+    font-size:23px;
 
-    padding:26px;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-
-    background:rgba(255,255,255,.015);
+    letter-spacing:2px;
 
 }
 
-.title{
-
-    font-size:26px;
-
-    letter-spacing:4px;
-
-    color:white;
-
-}
-
-.subtitle{
-
-    margin-top:6px;
+#logo span{
 
     color:var(--sub);
-
-    letter-spacing:3px;
 
     font-size:13px;
 
 }
 
-.status{
+.navTitle{
 
-    margin-top:24px;
+    color:#647999;
+
+    letter-spacing:4px;
+
+    font-size:12px;
+
+    margin-bottom:15px;
+
+}
+
+/* ============================================================
+MODULE BUTTONS
+============================================================ */
+
+.module{
+
+    background:none;
+
+    border:none;
+
+    color:#b8d6ff;
+
+    font-size:15px;
+
+    font-family:inherit;
+
+    text-align:left;
+
+    padding:14px 18px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.module:hover{
+
+    background:rgba(114,184,255,.08);
+
+    transform:translateX(4px);
+
+}
+
+.module.active{
+
+    background:
+
+    linear-gradient(
+    90deg,
+    rgba(114,184,255,.16),
+    rgba(114,184,255,.04));
+
+    border:1px solid rgba(114,184,255,.25);
+
+    box-shadow:
+
+    0 0 25px rgba(114,184,255,.08);
+
+}
+
+/* ============================================================
+MAIN AREA
+============================================================ */
+
+#main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* ============================================================
+TOP BAR
+============================================================ */
+
+#topbar{
+
+    height:95px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 35px;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+    background:rgba(15,20,28,.45);
+
+    backdrop-filter:blur(20px);
+
+}
+
+#systemName{
+
+    font-size:22px;
+
+    letter-spacing:2px;
+
+}
+
+#build{
+
+    margin-top:6px;
+
+    color:var(--sub);
+
+    font-size:13px;
+
+}
+
+#systemStatus{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:40px;
+
+}
+
+.statusItem{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    color:var(--sub);
 
 }
 
 .bar{
 
-    width:100%;
+    width:260px;
 
-    height:9px;
-
-    margin-top:8px;
-
-    background:#10151d;
+    height:8px;
 
     border-radius:50px;
 
     overflow:hidden;
+
+    background:#0a0d12;
+
+    border:1px solid rgba(255,255,255,.04);
 
 }
 
@@ -211,97 +335,219 @@ Header
 
     background:
 
-    linear-gradient(90deg,
-
-    #7ab8ff,
-
-    #8af6ff);
+    linear-gradient(
+    90deg,
+    var(--blue),
+    var(--cyan));
 
     box-shadow:
 
-    0 0 18px #8af6ff;
-
-    transition:width .6s;
+    0 0 25px var(--cyan);
 
 }
 
 #statusText{
 
-    display:block;
-
-    margin-top:12px;
-
-    color:#9df6ff;
-
-    font-size:14px;
+    color:var(--cyan);
 
 }
 
-/* ==========================================
-Output
-========================================== */
+/* ============================================================
+WORKSPACE
+============================================================ */
+
+#workspace{
+
+    flex:1;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:40px;
+
+}
+
+/* ============================================================
+WINDOW
+============================================================ */
+
+#window{
+
+    width:min(1000px,95%);
+
+    height:min(720px,90%);
+
+    background:
+
+    linear-gradient(
+    180deg,
+    rgba(20,25,35,.88),
+    rgba(11,15,21,.94));
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 0 50px rgba(0,0,0,.65),
+
+    0 0 120px rgba(114,184,255,.04);
+
+}
+
+/* ============================================================
+WINDOW HEADER
+============================================================ */
+
+#windowHeader{
+
+    height:58px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 24px;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+    background:
+
+    rgba(255,255,255,.015);
+
+    font-size:15px;
+
+    letter-spacing:2px;
+
+}
+
+.windowButtons{
+
+    display:flex;
+
+    gap:14px;
+
+}
+
+.windowButtons span{
+
+    width:28px;
+    height:28px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    color:#90a7c8;
+
+    transition:.2s;
+
+}
+
+.windowButtons span:hover{
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+}
+/* ============================================================
+OUTPUT
+============================================================ */
 
 #output{
 
-    height:calc(100% - 205px);
+    height:calc(100% - 62px);
 
     overflow-y:auto;
 
     padding:28px;
 
-    line-height:1.8;
+    line-height:1.85;
 
-    font-size:16px;
+    color:#dce8ff;
+
+    font-size:15px;
 
     white-space:pre-wrap;
 
-    scrollbar-width:none;
+    scrollbar-width:thin;
+
+    scrollbar-color:#5e7ea8 transparent;
 
 }
 
 #output::-webkit-scrollbar{
 
-display:none;
+    width:10px;
 
 }
 
-/* ==========================================
-Input
-========================================== */
+#output::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+#output::-webkit-scrollbar-thumb{
+
+    background:#30455e;
+
+    border-radius:20px;
+
+}
+
+#output::-webkit-scrollbar-thumb:hover{
+
+    background:#48658b;
+
+}
+
+/* ============================================================
+INPUT
+============================================================ */
 
 #inputRow{
 
-    position:absolute;
+    height:62px;
 
-    bottom:0;
-
-    left:0;
-
-    width:100%;
-
-    padding:20px 28px;
-
-    border-top:1px solid rgba(255,255,255,.06);
-
-    background:rgba(5,8,12,.9);
+    border-top:1px solid rgba(255,255,255,.05);
 
     display:flex;
 
     align-items:center;
 
+    padding:0 24px;
+
+    background:rgba(0,0,0,.18);
+
 }
 
 .prompt{
 
-    color:#8af6ff;
+    color:var(--cyan);
 
-    margin-right:12px;
+    margin-right:15px;
 
-    font-weight:bold;
+    font-weight:500;
+
+    letter-spacing:1px;
 
 }
 
-input{
+#command{
 
     flex:1;
 
@@ -313,49 +559,87 @@ input{
 
     color:white;
 
-    font-size:17px;
-
     font-family:inherit;
 
-}
-
-/* ==========================================
-Scanlines
-========================================== */
-
-#scanlines{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-
-    repeating-linear-gradient(
-
-    to bottom,
-
-    rgba(255,255,255,.03),
-
-    rgba(255,255,255,.03) 1px,
-
-    transparent 2px,
-
-    transparent 4px
-
-    );
-
-    opacity:.12;
-
-    pointer-events:none;
-
-    mix-blend-mode:overlay;
+    font-size:16px;
 
 }
 
-/* ==========================================
-Noise
-========================================== */
+#command::placeholder{
+
+    color:#5b7093;
+
+}
+
+/* ============================================================
+TEXT COLORS
+============================================================ */
+
+.system{
+
+    color:#7ec8ff;
+
+}
+
+.warning{
+
+    color:#ffcf75;
+
+}
+
+.error{
+
+    color:#ff8f8f;
+
+}
+
+.success{
+
+    color:#8fffb0;
+
+}
+
+.hidden{
+
+    color:#6e7f98;
+
+}
+
+/* ============================================================
+BOOT TEXT
+============================================================ */
+
+.bootLine{
+
+    margin-bottom:6px;
+
+}
+
+.cursor{
+
+    display:inline-block;
+
+    width:8px;
+
+    background:white;
+
+    animation:blink 1s infinite;
+
+}
+
+@keyframes blink{
+
+    50%{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ============================================================
+NOISE
+============================================================ */
 
 #noise{
 
@@ -363,53 +647,89 @@ Noise
 
     inset:0;
 
-    opacity:.04;
+    pointer-events:none;
+
+    opacity:.025;
+
+    background-image:
+
+    radial-gradient(circle,#ffffff 1px,transparent 1px);
+
+    background-size:4px 4px;
+
+    animation:noiseMove .35s steps(3) infinite;
+
+}
+
+@keyframes noiseMove{
+
+    0%{
+
+        transform:translate(0,0);
+
+    }
+
+    25%{
+
+        transform:translate(-2px,1px);
+
+    }
+
+    50%{
+
+        transform:translate(2px,-1px);
+
+    }
+
+    75%{
+
+        transform:translate(-1px,-2px);
+
+    }
+
+    100%{
+
+        transform:translate(2px,2px);
+
+    }
+
+}
+
+/* ============================================================
+SCANLINES
+============================================================ */
+
+#scanlines{
+
+    position:fixed;
+
+    inset:0;
 
     pointer-events:none;
 
-    background-image:url("assets/noise.png");
+    opacity:.07;
 
-    animation:noise .18s steps(2) infinite;
+    background:
 
-}
+    repeating-linear-gradient(
 
-@keyframes noise{
+        to bottom,
 
-0%{
+        rgba(255,255,255,.03),
 
-transform:translate(0,0);
+        rgba(255,255,255,.03) 1px,
 
-}
+        transparent 2px,
 
-25%{
+        transparent 4px
 
-transform:translate(-3px,2px);
-
-}
-
-50%{
-
-transform:translate(4px,-2px);
+    );
 
 }
 
-75%{
-
-transform:translate(-2px,-3px);
-
-}
-
-100%{
-
-transform:translate(2px,2px);
-
-}
-
-}
-
-/* ==========================================
-Vignette
-========================================== */
+/* ============================================================
+VIGNETTE
+============================================================ */
 
 #vignette{
 
@@ -421,183 +741,242 @@ Vignette
 
     box-shadow:
 
-    inset 0 0 200px rgba(0,0,0,.82);
+    inset 0 0 260px rgba(0,0,0,.75);
 
 }
 
-/* ==========================================
-Cursor Blink
-========================================== */
+/* ============================================================
+WINDOW ANIMATION
+============================================================ */
 
-.cursor{
+#window{
 
-animation:blink 1s infinite;
-
-}
-
-@keyframes blink{
-
-50%{
-
-opacity:0;
+    animation:windowAppear .7s cubic-bezier(.22,.8,.24,1);
 
 }
 
-}
+@keyframes windowAppear{
 
-/* ==========================================
-Small Flickers
-========================================== */
+    from{
 
-#terminal{
+        opacity:0;
 
-animation:flicker 7s infinite;
+        transform:translateY(35px) scale(.97);
 
-}
+    }
 
-@keyframes flicker{
+    to{
 
-0%,96%,100%{
+        opacity:1;
 
-opacity:1;
+        transform:translateY(0) scale(1);
 
-}
-
-97%{
-
-opacity:.97;
+    }
 
 }
 
-98%{
+/* ============================================================
+FLOATING BACKGROUND
+============================================================ */
 
-opacity:.93;
+#workspace::before{
 
-}
+    content:"";
 
-99%{
+    position:absolute;
 
-opacity:.985;
+    inset:0;
 
-}
+    pointer-events:none;
 
-}
+    background:
 
-/* ==========================================
-Selection
-========================================== */
+    radial-gradient(circle at 20% 25%,rgba(114,184,255,.03),transparent 25%),
 
-::selection{
+    radial-gradient(circle at 80% 70%,rgba(143,245,255,.02),transparent 30%);
 
-background:#7ab8ff;
-
-color:black;
-
-/* ==========================================
-Workspace
-========================================== */
-
-#workspace{
-
-display:flex;
-
-height:calc(100% - 170px);
+    animation:drift 18s ease-in-out infinite alternate;
 
 }
 
-/* Sidebar */
+@keyframes drift{
 
-#sidebar{
+    from{
 
-width:220px;
+        transform:translateY(-8px);
 
-background:#0d1117;
+    }
 
-border-right:1px solid rgba(255,255,255,.08);
+    to{
 
-padding:18px;
+        transform:translateY(12px);
 
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
+    }
 
 }
 
-.sideTitle{
-
-font-size:12px;
-
-letter-spacing:3px;
-
-color:#6a86af;
-
-margin-bottom:10px;
-
-}
-
-/* Buttons */
+/* ============================================================
+MODULE ANIMATIONS
+============================================================ */
 
 .module{
 
-background:transparent;
+    position:relative;
 
-border:none;
-
-padding:14px;
-
-color:#b9d5ff;
-
-font-family:inherit;
-
-font-size:15px;
-
-text-align:left;
-
-cursor:pointer;
-
-border-radius:8px;
-
-transition:.25s;
+    overflow:hidden;
 
 }
 
-.module:hover{
+.module::after{
 
-background:rgba(122,184,255,.08);
+    content:"";
+
+    position:absolute;
+
+    left:-100%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+    transition:.6s;
+
+}
+
+.module:hover::after{
+
+    left:100%;
 
 }
 
-.module.active{
+/* ============================================================
+WINDOW GLOW
+============================================================ */
 
-background:rgba(122,184,255,.18);
+#window::before{
 
-box-shadow:0 0 15px rgba(122,184,255,.15);
+    content:"";
 
-}
+    position:absolute;
 
-/* Main */
+    inset:0;
 
-#mainPanel{
+    pointer-events:none;
 
-display:flex;
+    border-radius:18px;
 
-flex-direction:column;
+    box-shadow:
 
-flex:1;
-
-}
-
-#output{
-
-flex:1;
+    inset 0 0 45px rgba(114,184,255,.03);
 
 }
 
-#inputRow{
+/* ============================================================
+TOP BAR GLOW
+============================================================ */
 
-margin-top:auto;
+#topbar::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:1px;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(114,184,255,.35),
+
+        transparent
+
+    );
 
 }
+
+/* ============================================================
+FOCUS
+============================================================ */
+
+#command:focus{
+
+    text-shadow:
+
+    0 0 10px rgba(143,245,255,.35);
+
+}
+
+/* ============================================================
+RESPONSIVE
+============================================================ */
+
+@media (max-width:1100px){
+
+#sidebar{
+
+    width:210px;
+
+}
+
+#window{
+
+    width:100%;
+
+}
+
+}
+
+@media (max-width:850px){
+
+#sidebar{
+
+    display:none;
+
+}
+
+#workspace{
+
+    padding:20px;
+
+}
+
+#topbar{
+
+    padding:0 20px;
+
+}
+
+.bar{
+
+    width:160px;
+
+}
+
 }
