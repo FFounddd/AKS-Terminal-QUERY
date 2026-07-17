@@ -980,3 +980,93 @@ RESPONSIVE
 }
 
 }
+
+.window{
+
+    position:absolute;
+
+    width:700px;
+
+    height:450px;
+
+    background:#10131a;
+
+    border:1px solid rgba(130,180,255,.18);
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:0 0 40px rgba(0,0,0,.45);
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.windowTitleBar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    height:36px;
+
+    padding:0 12px;
+
+    background:#171d28;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.windowTitle{
+
+    font-size:13px;
+
+    letter-spacing:.12em;
+
+    color:#d7e5ff;
+
+}
+
+.windowButtons{
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+.windowButtons button{
+
+    width:24px;
+
+    height:24px;
+
+    background:#232d3f;
+
+    border:none;
+
+    color:white;
+
+    cursor:pointer;
+
+    border-radius:4px;
+
+}
+
+.windowBody{
+
+    height:calc(100% - 36px);
+
+    overflow:auto;
+
+    padding:16px;
+
+}
