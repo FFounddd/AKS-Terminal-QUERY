@@ -7,17 +7,17 @@ const Archive = {
 
     files: {
 
-       noonday:{
+        noonday: {
 
-    title:"NOONDAY",
+            title: "NOONDAY",
 
-    classification:"BIOLOGICAL ENTITY",
+            classification: "BIOLOGICAL ENTITY",
 
-    clearance:"BLACK",
+            clearance: "BLACK",
 
-    status:"ACTIVE",
+            status: "ACTIVE",
 
-    contents:`
+            contents: `
 
 GLASSWRIGHT INTERNAL DOSSIER
 ==============================================
@@ -78,7 +78,12 @@ Unknown interference detected.
 The subject appears to WANT to remain hidden.
 
 PLEASE NOTE:
-The Noonday Devil is not to be trusted; they do not harbor good intentions. Any information circulated by this entity about prior house operations is likely falsehoods. 
+
+The Noonday Devil is not to be trusted.
+They do not harbor good intentions.
+Any information circulated by this entity
+regarding prior House operations should be
+considered deliberate misinformation.
 
 ----------------------------------------------
 
@@ -92,12 +97,36 @@ LAST INTERNAL MEMO
 
 "It's over."
 
-Transmission ends.
+Transmission Ends.
 
 ==============================================
 
 `
-},
+
+        }
+
+    },
+
+    open(file = "noonday"){
+
+        if(!WindowManager.exists("archiveWindow")){
+
+            WindowManager.create(
+
+                "archiveWindow",
+
+                "Crystal Archive",
+
+                `
+                <div id="archiveApp">
+
+                    <div id="archiveSidebar"></div>
+
+                    <div id="archiveViewer"></div>
+
+                </div>
+                `
+
             );
 
         }
@@ -118,7 +147,7 @@ Transmission ends.
 
         sidebar.innerHTML = "";
 
-        Object.keys(this.files).forEach(id=>{
+        Object.keys(this.files).forEach(id => {
 
             const file = this.files[id];
 
@@ -128,7 +157,7 @@ Transmission ends.
 
             button.textContent = file.title;
 
-            button.onclick = ()=>this.show(id);
+            button.onclick = () => this.show(id);
 
             sidebar.appendChild(button);
 
@@ -160,20 +189,11 @@ Transmission ends.
 
                 <hr>
 
-                <p>
-                <strong>Classification:</strong>
-                ${file.classification}
-                </p>
+                <p><strong>Classification:</strong> ${file.classification}</p>
 
-                <p>
-                <strong>Clearance:</strong>
-                ${file.clearance}
-                </p>
+                <p><strong>Clearance:</strong> ${file.clearance}</p>
 
-                <p>
-                <strong>Status:</strong>
-                ${file.status}
-                </p>
+                <p><strong>Status:</strong> ${file.status}</p>
 
                 <hr>
 
