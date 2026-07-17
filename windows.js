@@ -104,7 +104,7 @@ const WindowManager = (() => {
         if(!windows[id])
             return;
 
-        windows[id].element.classList.remove("hidden");
+        windows[id].element.classList.remove("windowHidden");
 
         windows[id].minimized = false;
 
@@ -117,7 +117,7 @@ const WindowManager = (() => {
         if(!windows[id])
             return;
 
-        windows[id].element.classList.add("hidden");
+        windows[id].element.classList.add("windowHidden");
 
     }
 
@@ -126,7 +126,7 @@ const WindowManager = (() => {
         if(!windows[id])
             return;
 
-        windows[id].element.classList.add("hidden");
+        windows[id].element.classList.add("windowHidden");
 
         windows[id].minimized = true;
 
@@ -137,7 +137,7 @@ const WindowManager = (() => {
         if(!windows[id])
             return;
 
-        if(windows[id].element.classList.contains("hidden"))
+        if(windows[id].element.classList.contains("windowHidden"))
             open(id);
         else
             close(id);
@@ -157,7 +157,7 @@ const WindowManager = (() => {
 
         const win = document.createElement("div");
 
-        win.className = "window hidden";
+        win.className = "window windowHidden";
 
         win.id = id;
 
