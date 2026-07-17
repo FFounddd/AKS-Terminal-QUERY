@@ -191,9 +191,9 @@
         "Displaying Public Documents."
 
       ]
-},
+   },
 
-    "Ayrenn":{
+    "ayrenn":{
 
       "stage0":[
 
@@ -207,23 +207,6 @@
 
       ]
 
-    },
-
-    "glasswright":{
-
-      "stage0":[
-
-        "Searching Corporate Archive...",
-
-        "",
-
-        "728 Public Records Found.",
-
-        "",
-
-        "Displaying Public Documents."
-
-      ]
     },
 
     "ori":{
