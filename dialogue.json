@@ -191,7 +191,39 @@
         "Displaying Public Documents."
 
       ]
+},
 
+    "Ayrenn":{
+
+      "stage0":[
+
+        "Ayrenn...",
+
+        "If you can hear me...",
+
+        "If this finds its way to you...",
+
+        "I'm sorry for what's about to happen."
+
+      ]
+
+    },
+
+    "glasswright":{
+
+      "stage0":[
+
+        "Searching Corporate Archive...",
+
+        "",
+
+        "728 Public Records Found.",
+
+        "",
+
+        "Displaying Public Documents."
+
+      ]
     },
 
     "ori":{
