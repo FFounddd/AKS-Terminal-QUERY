@@ -3,31 +3,104 @@
 // personnel.js
 // ======================================================
 
-let personnelData = {};
+const personnelData = {
 
-async function loadPersonnel(){
+    Found: {
 
-    const response = await fetch("personnel.json");
+        status: "Missing",
 
-    personnelData = await response.json();
+        house: "Unknown",
 
-}
+        classification: "Ionian",
+
+        clearance: "BLACK",
+
+        summary: "Former Glasswright employee. Personnel record heavily restricted.",
+
+        notes: [
+
+            "Subject disappeared during the AKS Incident.",
+            "Most records have been deleted.",
+            "Further access denied."
+
+        ]
+
+    },
+
+    Ori: {
+
+        status: "No Official Record",
+
+        house: "Unknown",
+
+        classification: "Unknown",
+
+        clearance: "NONE",
+
+        summary: "No personnel file exists for this individual.",
+
+        notes: [
+
+            "Database returned inconsistent results."
+
+        ]
+
+    },
+
+    Medea: {
+
+        status: "Deceased",
+
+        house: "Glasswright",
+
+        classification: "Research Division",
+
+        clearance: "RED",
+
+        summary: "Research assistant assigned to Project AKS.",
+
+        notes: [
+
+            "Cause of death classified."
+
+        ]
+
+    },
+
+    Noonday: {
+
+        status: "Destroyed",
+
+        house: "Sin Construct",
+
+        classification: "Minor Sin",
+
+        clearance: "BLACK",
+
+        summary: "Recovered construct remains unstable.",
+
+        notes: [
+
+            "Soul integrity unknown."
+
+        ]
+
+    }
+
+};
 
 const Personnel = {
 
-    async open(name = null){
-
-        if(Object.keys(personnelData).length === 0){
-
-            await loadPersonnel();
-
-        }
+    open(name = null){
 
         if(!WindowManager.exists("personnelWindow")){
 
             WindowManager.create(
+
                 "personnelWindow",
+
                 "Personnel Database",
+
                 `
                 <div id="personnelApp">
 
@@ -41,6 +114,7 @@ const Personnel = {
 
                 </div>
                 `
+
             );
 
         }
@@ -73,7 +147,7 @@ const Personnel = {
 
             button.textContent = person;
 
-            button.onclick = () => this.show(person);
+            button.onclick = () => Personnel.show(person);
 
             list.appendChild(button);
 
@@ -117,7 +191,7 @@ const Personnel = {
 
             <ul>
 
-                ${file.notes.map(n => `<li>${n}</li>`).join("")}
+                ${file.notes.map(note => `<li>${note}</li>`).join("")}
 
             </ul>
 
@@ -126,5 +200,3 @@ const Personnel = {
     }
 
 };
-
-loadPersonnel();
