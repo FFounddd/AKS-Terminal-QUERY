@@ -27,6 +27,57 @@ const WindowManager = (() => {
 
     }
 
+    function makeDraggable(win){
+
+    const bar = win.querySelector(".windowTitleBar");
+
+    let dragging = false;
+
+    let startX = 0;
+    let startY = 0;
+
+    let startLeft = 0;
+    let startTop = 0;
+
+    bar.addEventListener("mousedown", e => {
+
+        dragging = true;
+
+        focus(win.id);
+
+        startX = e.clientX;
+        startY = e.clientY;
+
+        const rect = win.getBoundingClientRect();
+
+        startLeft = rect.left;
+        startTop = rect.top;
+
+        e.preventDefault();
+
+    });
+
+    document.addEventListener("mousemove", e => {
+
+        if(!dragging)
+            return;
+
+        win.style.left =
+            startLeft + (e.clientX - startX) + "px";
+
+        win.style.top =
+            startTop + (e.clientY - startY) + "px";
+
+    });
+
+    document.addEventListener("mouseup", () => {
+
+        dragging = false;
+
+    });
+
+}
+
     function registerAll(){
 
         document.querySelectorAll(".window").forEach(win => {
