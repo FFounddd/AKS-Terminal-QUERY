@@ -1,24 +1,21 @@
 // ======================================================
 // Glasswright Module Launcher
+// modules.js
 // ======================================================
 
 const modules = document.querySelectorAll(".module");
-
-// -------------------------------------------
-// Window Definitions
-// -------------------------------------------
 
 const moduleWindows = {
 
     query(){
 
-        WindowManager.open("terminalWindow");
+        console.log("Query Terminal already active.");
 
     },
 
     archive(){
 
-        if(!document.getElementById("archiveWindow")){
+        if(!WindowManager.exists("archiveWindow")){
 
             WindowManager.create(
                 "archiveWindow",
@@ -26,7 +23,7 @@ const moduleWindows = {
                 `
                 <div class="placeholder">
                     <h2>Crystal Archive</h2>
-                    <p>No archive mounted.</p>
+                    <p>Archive system not installed.</p>
                 </div>
                 `
             );
@@ -39,36 +36,21 @@ const moduleWindows = {
 
     personnel(){
 
-        if(!document.getElementById("personnelWindow")){
-
-            WindowManager.create(
-                "personnelWindow",
-                "Personnel Database",
-                `
-                <div class="placeholder">
-                    <h2>Personnel Database</h2>
-                    <p>No personnel selected.</p>
-                </div>
-                `
-            );
-
-        }
-
-        WindowManager.open("personnelWindow");
+        Personnel.open();
 
     },
 
     research(){
 
-        if(!document.getElementById("researchWindow")){
+        if(!WindowManager.exists("researchWindow")){
 
             WindowManager.create(
                 "researchWindow",
                 "Research Database",
                 `
                 <div class="placeholder">
-                    <h2>Research</h2>
-                    <p>No research loaded.</p>
+                    <h2>Research Database</h2>
+                    <p>No research database available.</p>
                 </div>
                 `
             );
@@ -81,15 +63,15 @@ const moduleWindows = {
 
     logs(){
 
-        if(!document.getElementById("logsWindow")){
+        if(!WindowManager.exists("logsWindow")){
 
             WindowManager.create(
                 "logsWindow",
-                "Recovered Logs",
+                "Incident Archive",
                 `
                 <div class="placeholder">
-                    <h2>Recovered Logs</h2>
-                    <p>No logs recovered.</p>
+                    <h2>Incident Archive</h2>
+                    <p>No recovered incidents.</p>
                 </div>
                 `
             );
@@ -102,7 +84,7 @@ const moduleWindows = {
 
     network(){
 
-        if(!document.getElementById("networkWindow")){
+        if(!WindowManager.exists("networkWindow")){
 
             WindowManager.create(
                 "networkWindow",
@@ -123,7 +105,7 @@ const moduleWindows = {
 
     diagnostics(){
 
-        if(!document.getElementById("diagnosticsWindow")){
+        if(!WindowManager.exists("diagnosticsWindow")){
 
             WindowManager.create(
                 "diagnosticsWindow",
@@ -131,7 +113,7 @@ const moduleWindows = {
                 `
                 <div class="placeholder">
                     <h2>Diagnostics</h2>
-                    <p>No diagnostics available.</p>
+                    <p>Diagnostic tools unavailable.</p>
                 </div>
                 `
             );
@@ -144,15 +126,15 @@ const moduleWindows = {
 
 };
 
-// -------------------------------------------
+// ------------------------------------------------------
 // Sidebar Buttons
-// -------------------------------------------
+// ------------------------------------------------------
 
-modules.forEach(button=>{
+modules.forEach(button => {
 
-    button.addEventListener("click",()=>{
+    button.addEventListener("click", () => {
 
-        modules.forEach(b=>b.classList.remove("active"));
+        modules.forEach(b => b.classList.remove("active"));
 
         button.classList.add("active");
 
