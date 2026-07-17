@@ -182,16 +182,20 @@ const WindowManager = (() => {
             </div>
         `;
 
-        document.body.appendChild(win);
+      document.body.appendChild(win);
 
-        register(id);
+win.style.left = "180px";
+win.style.top = "120px";
 
-        win.querySelector(".closeBtn")
-            .addEventListener("click", () => close(id));
+register(id);
 
-        win.querySelector(".minBtn")
-            .addEventListener("click", () => minimize(id));
+makeDraggable(win);
 
+win.querySelector(".closeBtn")
+    .addEventListener("click", () => close(id));
+
+win.querySelector(".minBtn")
+    .addEventListener("click", () => minimize(id));
         return windows[id];
 
     }
