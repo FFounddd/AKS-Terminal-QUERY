@@ -132,6 +132,8 @@ SIDEBAR
 
     width:260px;
 
+    flex-shrink:0;
+
     background:rgba(8,12,18,.78);
 
     backdrop-filter:blur(18px);
@@ -280,6 +282,8 @@ MAIN AREA
     display:flex;
 
     flex-direction:column;
+
+    min-width:0;
 
 }
 
