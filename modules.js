@@ -9,28 +9,14 @@ const moduleWindows = {
 
     query(){
 
+        // Query Terminal is always open for now.
         console.log("Query Terminal already active.");
 
     },
 
     archive(){
 
-        if(!WindowManager.exists("archiveWindow")){
-
-            WindowManager.create(
-                "archiveWindow",
-                "Crystal Archive",
-                `
-                <div class="placeholder">
-                    <h2>Crystal Archive</h2>
-                    <p>Archive system not installed.</p>
-                </div>
-                `
-            );
-
-        }
-
-        WindowManager.open("archiveWindow");
+        Archive.open();
 
     },
 
@@ -42,85 +28,25 @@ const moduleWindows = {
 
     research(){
 
-        if(!WindowManager.exists("researchWindow")){
-
-            WindowManager.create(
-                "researchWindow",
-                "Research Database",
-                `
-                <div class="placeholder">
-                    <h2>Research Database</h2>
-                    <p>No research database available.</p>
-                </div>
-                `
-            );
-
-        }
-
-        WindowManager.open("researchWindow");
+        Research.open();
 
     },
 
     logs(){
 
-        if(!WindowManager.exists("logsWindow")){
-
-            WindowManager.create(
-                "logsWindow",
-                "Incident Archive",
-                `
-                <div class="placeholder">
-                    <h2>Incident Archive</h2>
-                    <p>No recovered incidents.</p>
-                </div>
-                `
-            );
-
-        }
-
-        WindowManager.open("logsWindow");
+        Logs.open();
 
     },
 
     network(){
 
-        if(!WindowManager.exists("networkWindow")){
-
-            WindowManager.create(
-                "networkWindow",
-                "Crystal Network",
-                `
-                <div class="placeholder">
-                    <h2>Crystal Network</h2>
-                    <p>No connected nodes.</p>
-                </div>
-                `
-            );
-
-        }
-
-        WindowManager.open("networkWindow");
+        Network.open();
 
     },
 
     diagnostics(){
 
-        if(!WindowManager.exists("diagnosticsWindow")){
-
-            WindowManager.create(
-                "diagnosticsWindow",
-                "Diagnostics",
-                `
-                <div class="placeholder">
-                    <h2>Diagnostics</h2>
-                    <p>Diagnostic tools unavailable.</p>
-                </div>
-                `
-            );
-
-        }
-
-        WindowManager.open("diagnosticsWindow");
+        Diagnostics.open();
 
     }
 
