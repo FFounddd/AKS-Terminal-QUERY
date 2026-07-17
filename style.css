@@ -83,15 +83,23 @@ DESKTOP
 
     position:fixed;
 
-    inset:0;
+    top:0;
+    left:0;
 
-    z-index:500;
+    width:100vw;
+    height:100vh;
+
+    z-index:9999;
 
     pointer-events:none;
+
+    overflow:visible;
 
 }
 
 #desktop .window{
+
+    position:absolute;
 
     pointer-events:auto;
 
@@ -1025,7 +1033,7 @@ RESPONSIVE
 
 }
 
-.hidden{
+.windowHidden{
 
     display:none;
 
