@@ -17,181 +17,177 @@
 
 <body>
 
-<!-- Ambient Effects -->
+    <!-- Floating Windows -->
+    <div id="desktop"></div>
 
-<div id="noise"></div>
-<div id="scanlines"></div>
-<div id="vignette"></div>
+    <!-- Ambient Effects -->
+    <div id="noise"></div>
+    <div id="scanlines"></div>
+    <div id="vignette"></div>
 
-<div id="desktop">
+    <!-- Entire Application -->
+    <div id="app">
 
-    <!-- ================= Sidebar ================= -->
+        <!-- ================= Sidebar ================= -->
 
-    <aside id="sidebar">
+        <aside id="sidebar">
 
-        <div id="logo">
+            <div id="logo">
 
-            <div class="logoSymbol">◈</div>
+                <div class="logoSymbol">◈</div>
 
-            <div>
+                <div>
 
-                <h1>GLASSWRIGHT</h1>
-                <span>Unified Archive System</span>
-
-            </div>
-
-        </div>
-
-        <div class="navTitle">
-            MODULES
-        </div>
-
-        <button class="module active" data-window="query">
-            Query Terminal
-        </button>
-
-        <button class="module" data-window="archive">
-            Crystal Archive
-        </button>
-
-        <button class="module" data-window="personnel">
-            Personnel
-        </button>
-
-        <button class="module" data-window="research">
-            Research
-        </button>
-
-        <button class="module" data-window="logs">
-            Recovered Logs
-        </button>
-
-        <button class="module" data-window="network">
-            Crystal Network
-        </button>
-
-        <button class="module" data-window="diagnostics">
-            Diagnostics
-        </button>
-
-    </aside>
-
-    <!-- ================= Main ================= -->
-
-    <main id="main">
-
-        <!-- Top Bar -->
-
-        <header id="topbar">
-
-            <div>
-
-                <div id="systemName">
-
-                    AKS REMOTE QUERY NODE
-
-                </div>
-
-                <div id="build">
-
-                    Build 2.7.18
+                    <h1>GLASSWRIGHT</h1>
+                    <span>Unified Archive System</span>
 
                 </div>
 
             </div>
 
-            <div id="systemStatus">
+            <div class="navTitle">
+                MODULES
+            </div>
 
-                <div class="statusItem">
+            <button class="module active" data-window="query">
+                Query Terminal
+            </button>
 
-                    Crystal Link
+            <button class="module" data-window="archive">
+                Crystal Archive
+            </button>
 
-                    <div class="bar">
+            <button class="module" data-window="personnel">
+                Personnel
+            </button>
 
-                        <div
-                        class="fill"
-                        id="linkBar">
+            <button class="module" data-window="research">
+                Research
+            </button>
+
+            <button class="module" data-window="logs">
+                Recovered Logs
+            </button>
+
+            <button class="module" data-window="network">
+                Crystal Network
+            </button>
+
+            <button class="module" data-window="diagnostics">
+                Diagnostics
+            </button>
+
+        </aside>
+
+        <!-- ================= Main ================= -->
+
+        <main id="main">
+
+            <!-- Top Bar -->
+
+            <header id="topbar">
+
+                <div>
+
+                    <div id="systemName">
+
+                        AKS REMOTE QUERY NODE
+
+                    </div>
+
+                    <div id="build">
+
+                        Build 2.7.18
+
+                    </div>
+
+                </div>
+
+                <div id="systemStatus">
+
+                    <div class="statusItem">
+
+                        Crystal Link
+
+                        <div class="bar">
+
+                            <div
+                                class="fill"
+                                id="linkBar">
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
+                    <div class="statusItem">
 
-                <div class="statusItem">
+                        <span id="statusText">
 
-                    <span id="statusText">
+                            CONNECTING...
 
-                        CONNECTING...
-
-                    </span>
-
-                </div>
-
-            </div>
-
-        </header>
-
-        <!-- Workspace -->
-
-        <section id="workspace">
-
-            <!-- This becomes draggable later -->
-
-            <div id="window">
-
-                <div id="windowHeader">
-
-                    <span>
-
-                        QUERY TERMINAL
-
-                    </span>
-
-                    <div class="windowButtons">
-
-                        <span>—</span>
-
-                        <span>□</span>
-
-                        <span>✕</span>
+                        </span>
 
                     </div>
 
                 </div>
 
-                <div id="output"></div>
+            </header>
 
-                <div id="inputRow">
+            <!-- Workspace -->
 
-                    <span class="prompt">
+            <section id="workspace">
 
-                        QUERY >
+                <div id="terminalWindow">
 
-                    </span>
+                    <div id="windowHeader">
 
-                    <input
-                        id="command"
-                        autocomplete="off"
-                        spellcheck="false"
-                        autofocus>
+                        <span>
+
+                            QUERY TERMINAL
+
+                        </span>
+
+                        <div class="windowButtons">
+
+                            <span>—</span>
+                            <span>□</span>
+                            <span>✕</span>
+
+                        </div>
+
+                    </div>
+
+                    <div id="output"></div>
+
+                    <div id="inputRow">
+
+                        <span class="prompt">
+
+                            QUERY >
+
+                        </span>
+
+                        <input
+                            id="command"
+                            autocomplete="off"
+                            spellcheck="false"
+                            autofocus>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </section>
 
-        </section>
+        </main>
 
-    </main>
+    </div>
 
-</div>
-
-<script src="boot.js"></script>
-<script src="terminal.js"></script>
-<script src="ui.js"></script>
-
-<script src="windows.js"></script>
+    <script src="boot.js"></script>
+    <script src="terminal.js"></script>
+    <script src="ui.js"></script>
+    <script src="windows.js"></script>
 
 </body>
-
 </html>
