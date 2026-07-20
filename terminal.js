@@ -153,6 +153,76 @@ async function playDialogue(key){
 }
 
 // ------------------------------------------------------
+// Hidden Events
+// ------------------------------------------------------
+
+async function playApology(){
+
+    input.disabled = true;
+
+    outputBox.innerHTML = "";
+
+    const overlay = document.getElementById("memoryOverlay");
+    const text = document.getElementById("memoryText");
+    const audio = document.getElementById("apologyAudio");
+
+    if(!overlay || !text){
+
+        console.error("memoryOverlay or memoryText not found.");
+
+        input.disabled = false;
+
+        return;
+
+    }
+
+    overlay.style.display = "flex";
+
+    text.style.opacity = "0";
+
+    text.textContent = "";
+
+    await wait(1000);
+
+    if(audio){
+
+        audio.currentTime = 0;
+
+        audio.play().catch(()=>{});
+
+    }
+
+    text.textContent = Letters.apology;
+
+    await wait(100);
+
+    text.style.opacity = "1";
+
+    if(audio){
+
+        await new Promise(resolve=>{
+
+            audio.onended = resolve;
+
+        });
+
+    }
+
+    await wait(3000);
+
+    overlay.style.display = "none";
+
+    text.textContent = "";
+
+    outputBox.innerHTML = "";
+
+    input.disabled = false;
+
+    input.focus();
+
+}
+
+// ------------------------------------------------------
 // Archive Search
 // ------------------------------------------------------
 // ------------------------------------------------------
