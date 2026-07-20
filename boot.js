@@ -3,6 +3,18 @@
 // Boot Sequence
 // ==========================================================
 
+let skipBoot = false;
+
+document.addEventListener("keydown", e => {
+
+    if(e.code === "Space"){
+
+        skipBoot = true;
+
+    }
+
+});
+
 const output = document.getElementById("output");
 const command = document.getElementById("command");
 const linkBar = document.getElementById("linkBar");
@@ -11,10 +23,32 @@ const statusText = document.getElementById("statusText");
 command.disabled = true;
 
 function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
+
+    return new Promise(resolve => {
+
+        if(skipBoot){
+
+            resolve();
+
+            return;
+
+        }
+
+        setTimeout(resolve, ms);
+
+    });
+
 }
 
 async function type(text, speed = 25){
+
+    if(skipBoot){
+
+    output.innerHTML += text + "<br>";
+
+    return;
+
+}
 
     const line = document.createElement("div");
     output.appendChild(line);
@@ -61,6 +95,44 @@ async function boot(){
 
     await type("Loading Crystal Runtime...");
     await progress(20);
+
+    if(skipBoot){
+
+    finishBoot();
+
+         output.innerHTML="";
+
+    const welcome=document.createElement("div");
+
+    welcome.innerHTML=`
+
+╔══════════════════════════════════════════════════════╗
+
+        AKS REMOTE QUERY TERMINAL
+
+Crystal Link.............STABLE
+
+Archive Integrity........UNKNOWN
+
+Administrator...........UNVERIFIED
+
+════════════════════════════════════════════════════════
+
+Type <b>help</b> to list available commands.
+
+`;
+
+    output.appendChild(welcome);
+
+    command.disabled=false;
+
+    command.focus();
+
+}
+
+    return;
+
+}
 
     statusText.textContent="INITIALIZING";
 
@@ -161,31 +233,7 @@ async function boot(){
 
     output.innerHTML="";
 
-    const welcome=document.createElement("div");
-
-    welcome.innerHTML=`
-
-╔══════════════════════════════════════════════════════╗
-
-        AKS REMOTE QUERY TERMINAL
-
-Crystal Link.............STABLE
-
-Archive Integrity........UNKNOWN
-
-Administrator...........UNVERIFIED
-
-════════════════════════════════════════════════════════
-
-Type <b>help</b> to list available commands.
-
-`;
-
-    output.appendChild(welcome);
-
-    command.disabled=false;
-
-    command.focus();
+ finishboot();
 
 }
 
