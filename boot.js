@@ -24,12 +24,11 @@ command.disabled = true;
 
 function sleep(ms){
 
-    return new Promise(resolve => {
+    return new Promise(resolve=>{
 
         if(skipBoot){
 
             resolve();
-
             return;
 
         }
@@ -42,20 +41,17 @@ function sleep(ms){
 
 async function type(text, speed = 25){
 
-    if(skipBoot){
-
-    output.innerHTML += text + "<br>";
-
-    return;
-
-}
+    if(skipBoot) return;
 
     const line = document.createElement("div");
+
     output.appendChild(line);
 
-    for(let i = 0; i < text.length; i++){
+    for(const char of text){
 
-        line.textContent += text[i];
+        if(skipBoot) return;
+
+        line.textContent += char;
 
         output.scrollTop = output.scrollHeight;
 
@@ -67,9 +63,13 @@ async function type(text, speed = 25){
 
 async function progress(target){
 
-    for(let i=0;i<=target;i+=2){
+    while(parseInt(linkBar.style.width || "0") < target){
 
-        linkBar.style.width=i+"%";
+        if(skipBoot) return;
+
+        const width = parseInt(linkBar.style.width || "0") + 2;
+
+        linkBar.style.width = width + "%";
 
         await sleep(20);
 
@@ -77,34 +77,17 @@ async function progress(target){
 
 }
 
-async function boot(){
+function finishBoot(){
 
-    await sleep(500);
+    linkBar.style.width = "100%";
 
-    await type("GLASSWRIGHT SYSTEMS",40);
-    await sleep(300);
+    statusText.textContent = "LINK STABLE";
 
-    await type("AKS REMOTE QUERY NODE",25);
+    output.innerHTML = "";
 
-    await sleep(600);
+    const welcome = document.createElement("div");
 
-    await type("");
-    await type("Beginning boot sequence...",18);
-
-    await sleep(700);
-
-    await type("Loading Crystal Runtime...");
-    await progress(20);
-
-    if(skipBoot){
-
-    finishBoot();
-
-         output.innerHTML="";
-
-    const welcome=document.createElement("div");
-
-    welcome.innerHTML=`
+    welcome.innerHTML = `
 
 ╔══════════════════════════════════════════════════════╗
 
@@ -124,53 +107,78 @@ Type <b>help</b> to list available commands.
 
     output.appendChild(welcome);
 
-    command.disabled=false;
+    command.disabled = false;
 
     command.focus();
 
 }
 
-    return;
+async function boot(){
 
-}
+    await sleep(500);
 
-    statusText.textContent="INITIALIZING";
+    if(skipBoot) return finishBoot();
+
+    await type("GLASSWRIGHT SYSTEMS",40);
+    await sleep(300);
+
+    if(skipBoot) return finishBoot();
+
+    await type("AKS REMOTE QUERY NODE",25);
 
     await sleep(600);
+
+    if(skipBoot) return finishBoot();
+
+    await type("");
+    await type("Beginning boot sequence...",18);
+
+    await sleep(700);
+
+    if(skipBoot) return finishBoot();
+
+    await type("Loading Crystal Runtime...");
+    await progress(20);
+
+    statusText.textContent = "INITIALIZING";
+
+    await sleep(600);
+
+    if(skipBoot) return finishBoot();
 
     await type("Synchronizing Neural Lattice...");
     await progress(45);
 
     await sleep(900);
 
-    await type("Verifying Archive Integrity...");
+    if(skipBoot) return finishBoot();
 
+    await type("Verifying Archive Integrity...");
     await progress(60);
 
     await sleep(700);
 
+    if(skipBoot) return finishBoot();
+
     await type("Scanning Connected Nodes...");
 
     await type(".");
-
     await sleep(350);
 
     await type("..");
-
     await sleep(450);
 
     await type("...");
-
     await sleep(1000);
 
-    await type("");
+    if(skipBoot) return finishBoot();
 
+    await type("");
     await type("REMOTE NODE DETECTED");
 
     await sleep(1000);
 
     await type("");
-
     await type("Node Classification:");
 
     await sleep(600);
@@ -180,12 +188,13 @@ Type <b>help</b> to list available commands.
     await sleep(800);
 
     await type("");
-
     await type("Attempting Authentication...");
 
     await progress(78);
 
     await sleep(1300);
+
+    if(skipBoot) return finishBoot();
 
     await type("Authentication Failed.");
 
@@ -219,7 +228,7 @@ Type <b>help</b> to list available commands.
 
     await progress(100);
 
-    statusText.textContent="LINK STABLE";
+    statusText.textContent = "LINK STABLE";
 
     await sleep(1200);
 
@@ -231,9 +240,7 @@ Type <b>help</b> to list available commands.
 
     await sleep(1800);
 
-    output.innerHTML="";
-
- finishboot();
+    finishBoot();
 
 }
 
