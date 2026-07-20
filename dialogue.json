@@ -207,7 +207,37 @@
 
       ]
 
-    },
+      "caelen": {
+
+  "stage0": [
+
+    "Searching Personnel Database...",
+
+    "...",
+
+    "No Personnel Record Found.",
+
+    "",
+
+    "That name predates the Houses."
+
+  ],
+
+  "stage1": [
+
+    "Searching Historical Archive...",
+
+    "...",
+
+    "Record Fragment Located.",
+
+    "",
+
+    "Access Restricted."
+
+    ]
+
+  },
 
     "ori":{
 
