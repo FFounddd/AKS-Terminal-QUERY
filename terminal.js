@@ -34,6 +34,8 @@ async function typeLine(text, speed = 18, color = "") {
 
     }
 
+}
+
 async function typeMemory(element, message){
 
     element.textContent = "";
@@ -420,5 +422,3 @@ loadDialogue().then(() => {
     console.log("Dialogue Loaded.");
 
 });
-
-}
