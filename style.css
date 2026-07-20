@@ -1139,16 +1139,25 @@ RESPONSIVE
 
 #memoryText{
 
-    max-width:850px;
+    max-width:900px;
 
     white-space:pre-wrap;
 
-    line-height:1.9;
+    color:#dffcff;
 
-    font-size:18px;
+    font-family:"IBM Plex Mono", monospace;
+
+    font-size:20px;
+
+    line-height:1.9;
 
     opacity:0;
 
-    transition:opacity 2s;
+    transition:opacity .8s;
+
+    text-shadow:
+        0 0 4px #8ff,
+        0 0 10px rgba(140,255,255,.8),
+        0 0 22px rgba(100,220,255,.45);
 
 }
