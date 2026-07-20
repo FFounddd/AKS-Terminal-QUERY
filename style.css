@@ -1110,3 +1110,45 @@ RESPONSIVE
     padding:16px;
 
 }
+
+#memoryOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:black;
+
+    color:#d9d9d9;
+
+    z-index:99999;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:auto;
+
+    padding:80px;
+
+    font-family:"IBM Plex Mono", monospace;
+
+}
+
+#memoryText{
+
+    max-width:850px;
+
+    white-space:pre-wrap;
+
+    line-height:1.9;
+
+    font-size:18px;
+
+    opacity:0;
+
+    transition:opacity 2s;
+
+}
