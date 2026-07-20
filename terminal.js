@@ -420,3 +420,5 @@ loadDialogue().then(() => {
     console.log("Dialogue Loaded.");
 
 });
+
+}
