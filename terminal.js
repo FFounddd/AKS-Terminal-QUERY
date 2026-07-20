@@ -34,6 +34,32 @@ async function typeLine(text, speed = 18, color = "") {
 
     }
 
+async function typeMemory(element, message){
+
+    element.textContent = "";
+
+    for(const char of message){
+
+        element.textContent += char;
+
+        await wait(28);
+
+    }
+
+}
+
+async function fadeMemory(element){
+
+    element.style.opacity = "0";
+
+    await wait(900);
+
+    element.textContent = "";
+
+    await wait(300);
+
+    element.style.opacity = "1";
+
 }
 
 function addOutput(text){
@@ -192,12 +218,17 @@ async function playApology(){
 
     }
 
-    text.textContent = Letters.apology;
+ text.style.opacity = "1";
 
-    await wait(100);
+for(const paragraph of Letters.apology){
 
-    text.style.opacity = "1";
+    await typeMemory(text, paragraph);
 
+    await wait(3500);
+
+    await fadeMemory(text);
+
+}
     if(audio){
 
         await new Promise(resolve=>{
