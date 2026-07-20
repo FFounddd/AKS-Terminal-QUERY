@@ -155,8 +155,20 @@ async function playDialogue(key){
 // ------------------------------------------------------
 // Archive Search
 // ------------------------------------------------------
+// ------------------------------------------------------
+// Archive Search
+// ------------------------------------------------------
 
 async function archiveSearch(term){
+
+    // Hidden Event
+    if(term === "apology"){
+
+        await playApology();
+
+        return;
+
+    }
 
     await typeLine("Searching Crystal Archive...",12);
 
