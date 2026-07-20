@@ -194,6 +194,10 @@ async function playApology(){
     const text = document.getElementById("memoryText");
     const audio = document.getElementById("apologyAudio");
 
+    console.log(audio);
+    console.log(audio.src);
+    console.log(audio.readyState);
+
     if(!overlay || !text){
 
         console.error("memoryOverlay or memoryText not found.");
@@ -216,8 +220,19 @@ async function playApology(){
 
         audio.currentTime = 0;
 
-        audio.play().catch(()=>{});
+   try {
 
+    audio.currentTime = 0;
+
+    await audio.play();
+
+    console.log("Apology audio started.");
+
+} catch(err) {
+
+    console.error("Audio failed:", err);
+
+}
     }
 
  text.style.opacity = "1";
