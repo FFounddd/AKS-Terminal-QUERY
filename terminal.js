@@ -711,5 +711,3 @@ loadDialogue().then(() => {
     updateISMVisuals();
 
 });
-
-});
