@@ -1163,15 +1163,27 @@ RESPONSIVE
 }
 
 /* ======================================================
-   ISM SYSTEM INSTABILITY
-   Active while ISM has control
+   ISM SYSTEM OVERRIDE
+   "THE SHOW MUST GO ON."
    ====================================================== */
 
 body.ism-unstable {
 
-    animation: screenShake 0.18s infinite;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(90, 35, 120, 0.12) 0%,
+            rgba(0, 0, 0, 0.95) 65%
+        );
+
+    animation: ismBreathing 5s ease-in-out infinite;
 
 }
+
+
+/* ======================================================
+   THE STAGE
+   ====================================================== */
 
 body.ism-unstable::before {
 
@@ -1186,21 +1198,35 @@ body.ism-unstable::before {
     z-index: 9998;
 
     background:
+
+        /* broken scanlines */
         repeating-linear-gradient(
             0deg,
-            rgba(255,255,255,0.025) 0px,
-            rgba(255,255,255,0.025) 1px,
-            transparent 1px,
-            transparent 4px
+            transparent 0px,
+            transparent 3px,
+            rgba(150, 90, 255, 0.035) 4px,
+            transparent 5px
+        ),
+
+        /* subtle radial spotlight */
+        radial-gradient(
+            ellipse at 50% 35%,
+            transparent 20%,
+            rgba(0,0,0,0.55) 100%
         );
 
-    opacity: 0.35;
+    mix-blend-mode: screen;
 
     animation:
-        scanlines 0.15s linear infinite,
-        staticFlicker 0.7s infinite;
+        ismScan 0.35s steps(4) infinite,
+        ismStage 6s ease-in-out infinite;
 
 }
+
+
+/* ======================================================
+   THE GLITCH LAYER
+   ====================================================== */
 
 body.ism-unstable::after {
 
@@ -1214,177 +1240,239 @@ body.ism-unstable::after {
 
     z-index: 9999;
 
-    box-shadow:
-        inset 0 0 80px rgba(138,246,255,0.08),
-        inset 0 0 180px rgba(255,0,80,0.04);
+    background:
 
-    animation: glitchPulse 2s infinite;
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(160,80,255,0.08) 45%,
+            rgba(255,255,255,0.05) 50%,
+            rgba(100,180,255,0.08) 55%,
+            transparent 100%
+        );
 
-}
+    opacity: 0;
 
-
-/* ------------------------------------------------------
-   Screen movement
-   ------------------------------------------------------ */
-
-@keyframes screenShake {
-
-    0% {
-        transform: translate(0,0);
-    }
-
-    20% {
-        transform: translate(-1px,1px);
-    }
-
-    40% {
-        transform: translate(1px,-1px);
-    }
-
-    60% {
-        transform: translate(-1px,0);
-    }
-
-    80% {
-        transform: translate(1px,1px);
-    }
-
-    100% {
-        transform: translate(0,0);
-    }
+    animation: ismInterference 7s infinite;
 
 }
 
 
-/* ------------------------------------------------------
-   Scanlines
-   ------------------------------------------------------ */
-
-@keyframes scanlines {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(4px);
-    }
-
-}
-
-
-/* ------------------------------------------------------
-   Static flicker
-   ------------------------------------------------------ */
-
-@keyframes staticFlicker {
-
-    0%, 100% {
-        opacity: 0.25;
-    }
-
-    10% {
-        opacity: 0.4;
-    }
-
-    11% {
-        opacity: 0.1;
-    }
-
-    35% {
-        opacity: 0.3;
-    }
-
-    36% {
-        opacity: 0.05;
-    }
-
-    70% {
-        opacity: 0.35;
-    }
-
-}
-
-
-/* ------------------------------------------------------
-   Glitch pulse
-   ------------------------------------------------------ */
-
-@keyframes glitchPulse {
-
-    0%, 90%, 100% {
-        opacity: 0;
-    }
-
-    91% {
-        opacity: 0.8;
-    }
-
-    92% {
-        opacity: 0;
-    }
-
-    94% {
-        opacity: 0.5;
-    }
-
-    95% {
-        opacity: 0;
-    }
-
-}
+/* ======================================================
+   TERMINAL
+   ====================================================== */
 
 body.ism-unstable #output {
 
     text-shadow:
         0 0 4px rgba(138,246,255,0.8),
-        0 0 12px rgba(138,246,255,0.3);
+        0 0 10px rgba(138,246,255,0.25);
+
+    animation: terminalPulse 4s ease-in-out infinite;
 
 }
 
-body.ism-unstable #output::after {
 
-    content: "";
+/* ======================================================
+   ISM'S "BREATHING" SCREEN
+   ====================================================== */
 
-    display: block;
+@keyframes ismBreathing {
 
-    height: 2px;
+    0%, 100% {
 
-    width: 100%;
+        filter:
+            brightness(1)
+            contrast(1);
 
-    margin-top: 8px;
+    }
 
-    background: rgba(138,246,255,0.3);
+    50% {
 
-    animation: terminalGlitch 1.7s infinite;
+        filter:
+            brightness(0.92)
+            contrast(1.12);
+
+    }
 
 }
 
-@keyframes terminalGlitch {
 
-    0%, 85%, 100% {
-        transform: translateX(0);
-        opacity: 0;
+/* ======================================================
+   SCANLINES DON'T MOVE NORMALLY
+   ====================================================== */
+
+@keyframes ismScan {
+
+    0% {
+
+        transform:
+            translateY(0)
+            scaleY(1);
+
     }
 
-    86% {
-        transform: translateX(-8px);
-        opacity: 1;
+    25% {
+
+        transform:
+            translateY(-7px)
+            scaleY(1.02);
+
     }
 
-    88% {
-        transform: translateX(12px);
+    50% {
+
+        transform:
+            translateY(3px)
+            scaleY(0.98);
+
+    }
+
+    75% {
+
+        transform:
+            translateY(-2px)
+            scaleY(1.01);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            scaleY(1);
+
+    }
+
+}
+
+
+/* ======================================================
+   PURPLE "STAGE LIGHT"
+   ====================================================== */
+
+@keyframes ismStage {
+
+    0%, 100% {
+
+        opacity: 0.35;
+
+    }
+
+    45% {
+
         opacity: 0.5;
+
     }
 
-    90% {
-        transform: translateX(-3px);
-        opacity: 1;
+    47% {
+
+        opacity: 0.8;
+
     }
 
-    92% {
-        transform: translateX(0);
+    49% {
+
+        opacity: 0.25;
+
+    }
+
+    70% {
+
+        opacity: 0.4;
+
+    }
+
+}
+
+
+/* ======================================================
+   RANDOM INTERFERENCE BURSTS
+   ====================================================== */
+
+@keyframes ismInterference {
+
+    0%, 72%, 100% {
+
         opacity: 0;
+
+        transform:
+            translateX(0)
+            skewX(0deg);
+
+    }
+
+    73% {
+
+        opacity: 0.8;
+
+        transform:
+            translateX(-12px)
+            skewX(-2deg);
+
+    }
+
+    74% {
+
+        opacity: 0.15;
+
+        transform:
+            translateX(18px)
+            skewX(3deg);
+
+    }
+
+    75% {
+
+        opacity: 0.7;
+
+        transform:
+            translateX(-5px)
+            skewX(-1deg);
+
+    }
+
+    76% {
+
+        opacity: 0;
+
+        transform:
+            translateX(0)
+            skewX(0deg);
+
+    }
+
+}
+
+
+/* ======================================================
+   TEXT PULSE
+   ====================================================== */
+
+@keyframes terminalPulse {
+
+    0%, 100% {
+
+        opacity: 1;
+
+    }
+
+    48% {
+
+        opacity: 1;
+
+    }
+
+    49% {
+
+        opacity: 0.82;
+
+    }
+
+    50% {
+
+        opacity: 1;
+
     }
 
 }
