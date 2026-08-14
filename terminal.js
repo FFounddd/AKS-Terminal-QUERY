@@ -9,11 +9,76 @@ const outputBox = document.getElementById("output");
 let dialogue = {};
 let storyStage = 0;
 
+// ======================================================
+// ISM LOCK
+// ======================================================
+
+// This is the key stored in the player's browser.
+// Once ISM is defeated, the website remembers it.
+const ISM_DEFEATED_KEY = "aks_ism_defeated";
+
+function isISMDefeated(){
+
+    return localStorage.getItem(ISM_DEFEATED_KEY) === "true";
+
+}
+
+
 // ------------------------------------------------------
-// Utility
+// Unlock Terminal After ISM
 // ------------------------------------------------------
 
+function defeatISM(){
+
+    localStorage.setItem(ISM_DEFEATED_KEY, "true");
+
+    outputBox.innerHTML = "";
+
+    addOutput("========================================");
+    addOutput("ISM CONNECTION TERMINATED");
+    addOutput("========================================");
+    addOutput("");
+    addOutput("SYSTEM CONTROL RESTORED.");
+    addOutput("");
+    addOutput("Administrative access restored.");
+    addOutput("");
+
+    input.disabled = false;
+    input.focus();
+
+    console.log("ISM defeated. Terminal unlocked.");
+
+}
+
+
+// ------------------------------------------------------
+// OPTIONAL: Reset ISM Lock
+// ------------------------------------------------------
+//
+// Run this in the browser console if you ever
+// want to lock the terminal again:
+//
+// resetISM();
+//
+// ------------------------------------------------------
+
+function resetISM(){
+
+    localStorage.removeItem(ISM_DEFEATED_KEY);
+
+    console.log("ISM lock restored.");
+
+    location.reload();
+
+}
+
+
+// ======================================================
+// Utility
+// ======================================================
+
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 
 async function typeLine(text, speed = 18, color = "") {
 
@@ -26,7 +91,7 @@ async function typeLine(text, speed = 18, color = "") {
 
     for (const char of text) {
 
-        div.innerHTML += char;
+        div.textContent += char;
 
         outputBox.scrollTop = outputBox.scrollHeight;
 
@@ -35,6 +100,7 @@ async function typeLine(text, speed = 18, color = "") {
     }
 
 }
+
 
 async function typeMemory(element, message){
 
@@ -50,6 +116,7 @@ async function typeMemory(element, message){
 
 }
 
+
 async function fadeMemory(element){
 
     element.style.opacity = "0";
@@ -64,6 +131,7 @@ async function fadeMemory(element){
 
 }
 
+
 function addOutput(text){
 
     const div = document.createElement("div");
@@ -76,6 +144,7 @@ function addOutput(text){
 
 }
 
+
 function printPrompt(text){
 
     const div = document.createElement("div");
@@ -87,9 +156,10 @@ function printPrompt(text){
 
 }
 
-// ------------------------------------------------------
+
+// ======================================================
 // Dialogue
-// ------------------------------------------------------
+// ======================================================
 
 async function loadDialogue(){
 
@@ -100,6 +170,7 @@ async function loadDialogue(){
     storyStage = dialogue.meta.storyStage;
 
 }
+
 
 async function playDialogue(key){
 
@@ -121,11 +192,13 @@ async function playDialogue(key){
 
         lines = response[stageKey];
 
-    }else if(response.default){
+    }
+    else if(response.default){
 
         lines = response.default;
 
-    }else{
+    }
+    else{
 
         await typeLine("No Dialogue Found.");
 
@@ -140,11 +213,14 @@ async function playDialogue(key){
 
             await wait(250);
 
-            outputBox.appendChild(document.createElement("br"));
+            outputBox.appendChild(
+                document.createElement("br")
+            );
 
             continue;
 
         }
+
 
         if(line === "..."){
 
@@ -156,23 +232,34 @@ async function playDialogue(key){
 
         }
 
+
         if(line === "ACCESS DENIED"){
 
-            await typeLine(line,22,"#ff6d6d");
+            await typeLine(
+                line,
+                22,
+                "#ff6d6d"
+            );
 
             continue;
 
         }
+
 
         if(line === "Correction."){
 
             await wait(700);
 
-            await typeLine(line,18,"#8af6ff");
+            await typeLine(
+                line,
+                18,
+                "#8af6ff"
+            );
 
             continue;
 
         }
+
 
         await typeLine(line);
 
@@ -180,9 +267,10 @@ async function playDialogue(key){
 
 }
 
-// ------------------------------------------------------
+
+// ======================================================
 // Hidden Events
-// ------------------------------------------------------
+// ======================================================
 
 async function playApology(){
 
@@ -190,17 +278,31 @@ async function playApology(){
 
     outputBox.innerHTML = "";
 
-    const overlay = document.getElementById("memoryOverlay");
-    const text = document.getElementById("memoryText");
-    const audio = document.getElementById("apologyAudio");
+    const overlay =
+        document.getElementById("memoryOverlay");
+
+    const text =
+        document.getElementById("memoryText");
+
+    const audio =
+        document.getElementById("apologyAudio");
+
 
     console.log(audio);
-    console.log(audio.src);
-    console.log(audio.readyState);
+
+    if(audio){
+
+        console.log(audio.src);
+        console.log(audio.readyState);
+
+    }
+
 
     if(!overlay || !text){
 
-        console.error("memoryOverlay or memoryText not found.");
+        console.error(
+            "memoryOverlay or memoryText not found."
+        );
 
         input.disabled = false;
 
@@ -208,47 +310,82 @@ async function playApology(){
 
     }
 
+
     overlay.style.display = "flex";
 
     text.style.opacity = "0";
 
     text.textContent = "";
 
+
     await wait(1000);
+
+
+    // --------------------------------------------------
+    // Apology Audio
+    // --------------------------------------------------
 
     if(audio){
 
         audio.currentTime = 0;
 
-   try {
+        try{
 
-    audio.currentTime = 0;
+            await audio.play();
 
-    await audio.play();
+            console.log(
+                "Apology audio started."
+            );
 
-    console.log("Apology audio started.");
+        }
+        catch(err){
 
-} catch(err) {
+            console.error(
+                "Audio failed:",
+                err
+            );
 
-    console.error("Audio failed:", err);
+        }
 
-}
     }
 
- text.style.opacity = "1";
 
-for(const paragraph of Letters.apology){
+    // --------------------------------------------------
+    // Apology Text
+    // --------------------------------------------------
 
-    await typeMemory(text, paragraph);
+    text.style.opacity = "1";
 
-    await wait(3500);
 
-    await fadeMemory(text);
+    for(const paragraph of Letters.apology){
 
-}
+        await typeMemory(
+            text,
+            paragraph
+        );
+
+        await wait(3500);
+
+        await fadeMemory(text);
+
+    }
+
+
+    // --------------------------------------------------
+    // Wait For Audio
+    // --------------------------------------------------
+
     if(audio){
 
-        await new Promise(resolve=>{
+        await new Promise(resolve => {
+
+            if(audio.ended){
+
+                resolve();
+
+                return;
+
+            }
 
             audio.onended = resolve;
 
@@ -256,7 +393,9 @@ for(const paragraph of Letters.apology){
 
     }
 
+
     await wait(3000);
+
 
     overlay.style.display = "none";
 
@@ -270,16 +409,17 @@ for(const paragraph of Letters.apology){
 
 }
 
-// ------------------------------------------------------
+
+// ======================================================
 // Archive Search
-// ------------------------------------------------------
-// ------------------------------------------------------
-// Archive Search
-// ------------------------------------------------------
+// ======================================================
 
 async function archiveSearch(term){
 
-    // Hidden Event
+    // --------------------------------------------------
+    // Hidden Apology Event
+    // --------------------------------------------------
+
     if(term === "apology"){
 
         await playApology();
@@ -288,30 +428,98 @@ async function archiveSearch(term){
 
     }
 
-    await typeLine("Searching Crystal Archive...",12);
+
+    await typeLine(
+        "Searching Crystal Archive...",
+        12
+    );
 
     await wait(500);
 
-    await typeLine("Searching Incident Reports...",12);
+
+    await typeLine(
+        "Searching Incident Reports...",
+        12
+    );
 
     await wait(600);
 
-    await typeLine("Searching Personnel Database...",12);
+
+    await typeLine(
+        "Searching Personnel Database...",
+        12
+    );
 
     await wait(900);
+
 
     await playDialogue(term);
 
 }
 
-// ------------------------------------------------------
+
+// ======================================================
 // Commands
-// ------------------------------------------------------
+// ======================================================
 
 async function handleCommand(cmd){
 
-    const split = cmd.toLowerCase().split(" ");
+    const split =
+        cmd.toLowerCase().split(" ");
+
     const base = split[0];
+
+
+    // ==================================================
+    // ISM LOCK
+    // ==================================================
+
+    if(!isISMDefeated()){
+
+        // These commands remain available while
+        // ISM has control of the terminal.
+        const allowedCommands = [
+
+            "help",
+            "query"
+
+        ];
+
+
+        if(!allowedCommands.includes(base)){
+
+            await typeLine(
+                "ACCESS RESTRICTED.",
+                22,
+                "#ff6d6d"
+            );
+
+            await wait(500);
+
+
+            await typeLine(
+                "ISM SYSTEM OVERRIDE ACTIVE.",
+                18,
+                "#8af6ff"
+            );
+
+            await wait(700);
+
+
+            await typeLine(
+                "Administrative functions are unavailable."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    // ==================================================
+    // NORMAL COMMANDS
+    // ==================================================
 
     switch(base){
 
@@ -321,11 +529,13 @@ async function handleCommand(cmd){
 
         break;
 
+
         case "status":
 
             await playDialogue("status");
 
         break;
+
 
         case "clear":
 
@@ -333,107 +543,159 @@ async function handleCommand(cmd){
 
         break;
 
+
         case "disconnect":
 
-            await typeLine("Disconnect request denied.");
+            await typeLine(
+                "Disconnect request denied."
+            );
 
         break;
+
 
         case "who":
 
-            await typeLine("Searching Personnel Database...");
+            await typeLine(
+                "Searching Personnel Database..."
+            );
 
             await wait(900);
 
-            await typeLine("Identity unavailable.");
+            await typeLine(
+                "Identity unavailable."
+            );
 
         break;
+
 
         case "query":
 
             if(split.length < 2){
 
-                await typeLine("Usage: query <term>");
+                await typeLine(
+                    "Usage: query <term>"
+                );
 
-            }else{
+            }
+            else{
 
-                await archiveSearch(split.slice(1).join(" "));
+                await archiveSearch(
+                    split.slice(1).join(" ")
+                );
 
             }
 
         break;
 
+
         case "archive":
 
             addOutput("");
-            addOutput("Opening Crystal Archive...");
+
+            addOutput(
+                "Opening Crystal Archive..."
+            );
 
         break;
+
 
         case "logs":
 
             addOutput("");
-            addOutput("Recovered Logs");
+
+            addOutput(
+                "Recovered Logs"
+            );
 
         break;
+
 
         case "personnel":
 
             addOutput("");
-            addOutput("Opening Personnel Database...");
+
+            addOutput(
+                "Opening Personnel Database..."
+            );
 
         break;
 
+
         default:
 
-            await typeLine("Unknown Command.");
+            await typeLine(
+                "Unknown Command."
+            );
 
             await wait(700);
 
-            await typeLine("Type HELP");
+            await typeLine(
+                "Type HELP"
+            );
 
     }
 
 }
 
-// ------------------------------------------------------
+
+// ======================================================
 // Input
-// ------------------------------------------------------
+// ======================================================
 
-input.addEventListener("keydown", async (e)=>{
+input.addEventListener(
+    "keydown",
+    async (e) => {
 
-    if(e.key !== "Enter")
-        return;
+        if(e.key !== "Enter")
+            return;
 
-    const cmd = input.value.trim();
 
-    if(cmd === "")
-        return;
+        const cmd =
+            input.value.trim();
 
-    input.disabled = true;
 
-    printPrompt(cmd);
+        if(cmd === "")
+            return;
 
-    console.log("COMMAND:", cmd);
 
-    input.value = "";
+        input.disabled = true;
 
-    await handleCommand(cmd);
 
-    outputBox.scrollTop = outputBox.scrollHeight;
+        printPrompt(cmd);
 
-    input.disabled = false;
 
-    input.focus();
+        console.log(
+            "COMMAND:",
+            cmd
+        );
 
-});
 
-// ------------------------------------------------------
+        input.value = "";
+
+
+        await handleCommand(cmd);
+
+
+        outputBox.scrollTop =
+            outputBox.scrollHeight;
+
+
+        input.disabled = false;
+
+        input.focus();
+
+    }
+);
+
+
+// ======================================================
 // Startup
-// ------------------------------------------------------
+// ======================================================
 
 loadDialogue().then(() => {
 
-    console.log("Dialogue Loaded.");
+    console.log(
+        "Dialogue Loaded."
+    );
 
 });
