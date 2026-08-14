@@ -13,8 +13,6 @@ let storyStage = 0;
 // ISM LOCK
 // ======================================================
 
-// This is the key stored in the player's browser.
-// Once ISM is defeated, the website remembers it.
 const ISM_DEFEATED_KEY = "aks_ism_defeated";
 
 function isISMDefeated(){
@@ -23,6 +21,20 @@ function isISMDefeated(){
 
 }
 
+function updateISMVisuals(){
+
+    if(isISMDefeated()){
+
+        document.body.classList.remove("ism-unstable");
+
+    }
+    else{
+
+        document.body.classList.add("ism-unstable");
+
+    }
+
+}
 
 // ------------------------------------------------------
 // Unlock Terminal After ISM
@@ -694,8 +706,10 @@ input.addEventListener(
 
 loadDialogue().then(() => {
 
-    console.log(
-        "Dialogue Loaded."
-    );
+    console.log("Dialogue Loaded.");
+
+    updateISMVisuals();
+
+});
 
 });
