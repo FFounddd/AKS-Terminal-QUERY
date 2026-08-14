@@ -473,14 +473,10 @@ async function archiveSearch(term){
 // ======================================================
 // Commands
 // ======================================================
-
 async function handleCommand(cmd){
 
-    const split =
-        cmd.toLowerCase().split(" ");
-
+    const split = cmd.toLowerCase().split(" ");
     const base = split[0];
-
 
     // ==================================================
     // ISM LOCK
@@ -488,15 +484,12 @@ async function handleCommand(cmd){
 
     if(!isISMDefeated()){
 
-        // These commands remain available while
-        // ISM has control of the terminal.
         const allowedCommands = [
-
             "help",
-            "query"
-
+            "query",
+            "clear",
+            "eter"
         ];
-
 
         if(!allowedCommands.includes(base)){
 
@@ -506,20 +499,36 @@ async function handleCommand(cmd){
                 "#ff6d6d"
             );
 
-            await wait(500);
-
+            await wait(400);
 
             await typeLine(
-                "ISM SYSTEM OVERRIDE ACTIVE.",
-                18,
+                "...",
+                70,
                 "#8af6ff"
             );
 
-            await wait(700);
-
+            await wait(600);
 
             await typeLine(
-                "Administrative functions are unavailable."
+                "HAHAHAHA, what are you looking for!?",
+                35,
+                "#c58cff"
+            );
+
+            await wait(500);
+
+            await typeLine(
+                "We aren't done yet! I can't let you contact that... lesser agent; you can tell him all about me later!",
+                35,
+                "#c58cff"
+            );
+
+            await wait(800);
+
+            await typeLine(
+                "ISM SYSTEM OVERRIDE ACTIVE.   :)",
+                18,
+                "#ff6dff"
             );
 
             return;
@@ -527,7 +536,6 @@ async function handleCommand(cmd){
         }
 
     }
-
 
     // ==================================================
     // NORMAL COMMANDS
@@ -603,10 +611,7 @@ async function handleCommand(cmd){
         case "archive":
 
             addOutput("");
-
-            addOutput(
-                "Opening Crystal Archive..."
-            );
+            addOutput("Opening Crystal Archive...");
 
         break;
 
@@ -614,10 +619,7 @@ async function handleCommand(cmd){
         case "logs":
 
             addOutput("");
-
-            addOutput(
-                "Recovered Logs"
-            );
+            addOutput("Recovered Logs");
 
         break;
 
@@ -625,10 +627,7 @@ async function handleCommand(cmd){
         case "personnel":
 
             addOutput("");
-
-            addOutput(
-                "Opening Personnel Database..."
-            );
+            addOutput("Opening Personnel Database...");
 
         break;
 
